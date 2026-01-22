@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Криптон</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            margin-bottom: 25px;
+            transition: transform 0.2s ease;
+        }
+        .container:hover {
+            transform: translateY(-2px);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        textarea, input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e1e8ed;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        textarea:focus, input[type="text"]:focus, input[type="file"]:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: monospace;
+        }
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+        .btn-danger {
+            background-color: #e74c3c;
+        }
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        .btn-success {
+            background-color: #2ecc71;
+        }
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+        .btn-secondary {
+            background-color: #95a5a6;
+        }
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+        .result {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 10px;
+            word-break: break-all;
+            font-family: monospace;
+            min-height: 60px;
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background: #f8f9fa;
+        }
+        .key-info {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        .action-buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .key-display {
+            font-family: monospace;
+            font-size: 12px;
+            background-color: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+            margin-top: 10px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            border: 1px solid #e9ecef;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .message {
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            animation: fadeIn 0.3s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-ready {
+            background-color: #2ecc71;
+        }
+        .status-not-ready {
+            background-color: #e74c3c;
+        }
+        .key-status {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .key-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .input-with-button {
+            display: flex;
+            gap: 10px;
+        }
+        .input-with-button textarea {
+            flex: 1;
+        }
+        .loader {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .btn:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .btn:disabled:hover {
+            background-color: #bdc3c7;
+            transform: none;
+            box-shadow: none;
+        }
+        .example-text {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        .auto-copy {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .auto-copy input {
+            margin-right: 8px;
+        }
+        .file-input-container {
+            margin: 15px 0;
+        }
+        .file-info {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔐 Криптон. RSA Шифрование и Дешифрование</h1>
+    
+    <div class="container">
+        <h2>🗝️ Управление ключами</h2>
+        <div class="key-status">
+            <span id="keyStatusIndicator" class="status-indicator status-not-ready"></span>
+            <span id="keyStatusText">Ключи не загружены</span>
+        </div>
+        
+        <div class="action-buttons">
+            <button id="generateKeys" class="btn">
+                <span class="loader" id="generateLoader" style="display: none;"></span>
+                Сгенерировать новые ключи
+            </button>
+            <button id="loadKeys" class="btn">Загрузить ключи из файла</button>
+            <button id="loadFromStorage" class="btn">Загрузить из хранилища</button>
+            <button id="clearKeys" class="btn btn-danger">Очистить ключи</button>
+            <button id="exportKeys" class="btn btn-secondary">Экспорт ключей</button>
+        </div>
+        
+        <div class="file-input-container" id="fileInputContainer" style="display: none;">
+            <label for="keyFileInput">Выберите файл с ключами (JSON):</label>
+            <input type="file" id="keyFileInput" accept=".json,application/json">
+            <div class="file-info">Файл должен быть в формате JSON, экспортированный из этого приложения</div>
+        </div>
+        
+        <div class="form-group">
+            <label>🔑 Приватный ключ:</label>
+            <div id="privateKeyDisplay" class="key-display">Ключ не загружен</div>
+            <button class="copy-btn" data-target="privateKeyDisplay">Копировать</button>
+        </div>
+        
+        <div class="form-group">
+            <label>🔓 Публичный ключ:</label>
+            <div id="publicKeyDisplay" class="key-display">Ключ не загружен</div>
+            <button class="copy-btn" data-target="publicKeyDisplay">Копировать</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>🔒 Шифрование сообщения</h2>
+        <div class="form-group">
+            <label for="messageToEncrypt">Сообщение для шифрования:</label>
+            <textarea id="messageToEncrypt" placeholder="Введите текст для шифрования..."></textarea>
+            <div class="example-text">Пример: Конфиденциальное сообщение</div>
+        </div>
+        
+        <div class="auto-copy">
+            <input type="checkbox" id="autoCopyEncrypted" checked>
+            <label for="autoCopyEncrypted">Автоматически копировать результат в поле дешифрования</label>
+        </div>
+        
+        <button id="encryptBtn" class="btn btn-success">
+            <span class="loader" id="encryptLoader" style="display: none;"></span>
+            Зашифровать
+        </button>
+        
+        <div class="form-group">
+            <label>Зашифрованное сообщение (hex):</label>
+            <div id="encryptedResult" class="result">Здесь будет отображен результат шифрования</div>
+            <button class="copy-btn" data-target="encryptedResult">Копировать</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>🔓 Дешифрование сообщения</h2>
+        <div class="form-group">
+            <label for="messageToDecrypt">Зашифрованное сообщение (hex):</label>
+            <textarea id="messageToDecrypt" placeholder="Введите зашифрованное сообщение в hex-формате..."></textarea>
+            <div class="example-text">Пример: 4a8f1e... (должен начинаться с hex-символов)</div>
+        </div>
+        
+        <button id="decryptBtn" class="btn btn-success">
+            <span class="loader" id="decryptLoader" style="display: none;"></span>
+            Дешифровать
+        </button>
+        
+        <div class="form-group">
+            <label>Расшифрованное сообщение:</label>
+            <div id="decryptedResult" class="result">Здесь будет отображен результат дешифрования</div>
+            <button class="copy-btn" data-target="decryptedResult">Копировать</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>💡 Советы по использованию</h2>
+        <ul>
+            <li>Сначала сгенерируйте или загрузите ключи</li>
+            <li>Для шифрования используется публичный ключ</li>
+            <li>Для дешифрования используется приватный ключ</li>
+            <li>Ключи сохраняются автоматически в вашем браузере</li>
+            <li>Не передавайте приватный ключ другим лицам</li>
+            <li>Экспортируйте ключи для резервного копирования</li>
+        </ul>
+    </div>
+    
+    <div id="messageArea"></div>
+
+    <script>
+        // Глобальные переменные для хранения ключей
+        let cryptoKeys = null;
+        let autoCopyEnabled = true;
+        
+        // Элементы DOM
+        const generateKeysBtn = document.getElementById('generateKeys');
+        const loadKeysBtn = document.getElementById('loadKeys');
+        const loadFromStorageBtn = document.getElementById('loadFromStorage');
+        const clearKeysBtn = document.getElementById('clearKeys');
+        const exportKeysBtn = document.getElementById('exportKeys');
+        const encryptBtn = document.getElementById('encryptBtn');
+        const decryptBtn = document.getElementById('decryptBtn');
+        const messageToEncrypt = document.getElementById('messageToEncrypt');
+        const messageToDecrypt = document.getElementById('messageToDecrypt');
+        const encryptedResult = document.getElementById('encryptedResult');
+        const decryptedResult = document.getElementById('decryptedResult');
+        const privateKeyDisplay = document.getElementById('privateKeyDisplay');
+        const publicKeyDisplay = document.getElementById('publicKeyDisplay');
+        const messageArea = document.getElementById('messageArea');
+        const keyStatusIndicator = document.getElementById('keyStatusIndicator');
+        const keyStatusText = document.getElementById('keyStatusText');
+        const generateLoader = document.getElementById('generateLoader');
+        const encryptLoader = document.getElementById('encryptLoader');
+        const decryptLoader = document.getElementById('decryptLoader');
+        const autoCopyCheckbox = document.getElementById('autoCopyEncrypted');
+        const fileInputContainer = document.getElementById('fileInputContainer');
+        const keyFileInput = document.getElementById('keyFileInput');
+        
+        // Инициализация
+        function init() {
+            loadFromStorage(); // Попытаться загрузить ключи из хранилища при загрузке страницы
+            setupEventListeners();
+            updateUI();
+        }
+        
+        // Настройка обработчиков событий
+        function setupEventListeners() {
+            generateKeysBtn.addEventListener('click', generateKeys);
+            loadKeysBtn.addEventListener('click', showFileInput);
+            loadFromStorageBtn.addEventListener('click', loadFromStorage);
+            clearKeysBtn.addEventListener('click', clearKeys);
+            exportKeysBtn.addEventListener('click', exportKeys);
+            encryptBtn.addEventListener('click', encryptMessage);
+            decryptBtn.addEventListener('click', decryptMessage);
+            
+            // Обработчик выбора файла
+            keyFileInput.addEventListener('change', handleFileSelect);
+            
+            // Автоматическое копирование
+            autoCopyCheckbox.addEventListener('change', (e) => {
+                autoCopyEnabled = e.target.checked;
+            });
+            
+            // Кнопки копирования
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    const targetElement = document.getElementById(targetId);
+                    copyToClipboard(targetElement.textContent);
+                    showMessage('Текст скопирован в буфер обмена', 'success');
+                });
+            });
+            
+            // Валидация hex-ввода
+            messageToDecrypt.addEventListener('input', function() {
+                const value = this.value.trim();
+                if (value && !/^[0-9a-fA-F]+$/.test(value)) {
+                    this.style.borderColor = '#e74c3c';
+                    showMessage('Введите корректный hex-формат (только 0-9, a-f, A-F)', 'warning');
+                } else {
+                    this.style.borderColor = '#e1e8ed';
+                }
+            });
+            
+            // Сохранение текста при перезагрузке
+            messageToEncrypt.addEventListener('input', debounce(saveTextState, 500));
+            messageToDecrypt.addEventListener('input', debounce(saveTextState, 500));
+        }
+        
+        // Показать поле выбора файла
+        function showFileInput() {
+            fileInputContainer.style.display = 'block';
+            keyFileInput.value = ''; // Сбросить предыдущий выбор
+            showMessage('Выберите файл с ключами в формате JSON', 'warning');
+        }
+        
+        // Обработчик выбора файла
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            
+            reader.onload = async (e) => {
+                try {
+                    const fileContent = e.target.result;
+                    const keysData = JSON.parse(fileContent);
+                    
+                    // Проверяем структуру файла
+                    if (!keysData.privateKey || !keysData.publicKey) {
+                        throw new Error('Неверный формат файла. Файл должен содержать приватный и публичный ключи.');
+                    }
+                    
+                    // Импортируем ключи
+                    await importKeysFromData(keysData.privateKey, keysData.publicKey);
+                    fileInputContainer.style.display = 'none';
+                    showMessage('✅ Ключи успешно загружены из файла');
+                } catch (error) {
+                    console.error('Ошибка при загрузке ключей из файла:', error);
+                    showMessage('❌ Ошибка при загрузке ключей из файла: ' + error.message, 'error');
+                }
+            };
+            
+            reader.onerror = () => {
+                showMessage('❌ Ошибка при чтении файла', 'error');
+            };
+            
+            reader.readAsText(file);
+        }
+        
+        // Импорт ключей из данных
+        async function importKeysFromData(privateKeyBase64, publicKeyBase64) {
+            try {
+                const privateKeyData = base64ToArrayBuffer(privateKeyBase64);
+                const publicKeyData = base64ToArrayBuffer(publicKeyBase64);
+                
+                cryptoKeys = {
+                    privateKey: await window.crypto.subtle.importKey(
+                        "pkcs8",
+                        privateKeyData,
+                        {
+                            name: "RSA-OAEP",
+                            hash: "SHA-256"
+                        },
+                        true,
+                        ["decrypt"]
+                    ),
+                    publicKey: await window.crypto.subtle.importKey(
+                        "spki",
+                        publicKeyData,
+                        {
+                            name: "RSA-OAEP",
+                            hash: "SHA-256"
+                        },
+                        true,
+                        ["encrypt"]
+                    )
+                };
+                
+                // Сохраняем в localStorage
+                await saveKeys();
+                await updateKeyDisplay();
+                updateUI();
+                
+            } catch (error) {
+                console.error('Ошибка при импорте ключей:', error);
+                throw new Error('Не удалось импортировать ключи. Проверьте формат файла.');
+            }
+        }
+        
+        // Debounce для оптимизации
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        // Сохранение состояния текстовых полей
+        function saveTextState() {
+            const state = {
+                messageToEncrypt: messageToEncrypt.value,
+                messageToDecrypt: messageToDecrypt.value
+            };
+            localStorage.setItem('rsaTextState', JSON.stringify(state));
+        }
+        
+        // Загрузка состояния текстовых полей
+        function loadTextState() {
+            try {
+                const state = JSON.parse(localStorage.getItem('rsaTextState'));
+                if (state) {
+                    messageToEncrypt.value = state.messageToEncrypt || '';
+                    messageToDecrypt.value = state.messageToDecrypt || '';
+                }
+            } catch (e) {
+                console.warn('Не удалось загрузить состояние текста:', e);
+            }
+        }
+        
+        // Обновление UI в зависимости от состояния
+        function updateUI() {
+            const hasKeys = cryptoKeys !== null;
+            
+            // Обновление статуса ключей
+            if (hasKeys) {
+                keyStatusIndicator.className = 'status-indicator status-ready';
+                keyStatusText.textContent = 'Ключи загружены и готовы к использованию';
+                keyStatusText.style.color = '#27ae60';
+            } else {
+                keyStatusIndicator.className = 'status-indicator status-not-ready';
+                keyStatusText.textContent = 'Ключи не загружены';
+                keyStatusText.style.color = '#e74c3c';
+            }
+            
+            // Активация/деактивация кнопок
+            encryptBtn.disabled = !hasKeys;
+            decryptBtn.disabled = !hasKeys;
+            exportKeysBtn.disabled = !hasKeys;
+            
+            // Визуальная обратная связь
+            encryptBtn.title = hasKeys ? '' : 'Сначала загрузите или сгенерируйте ключи';
+            decryptBtn.title = hasKeys ? '' : 'Сначала загрузите или сгенерируйте ключи';
+        }
+        
+        // Показать сообщение
+        function showMessage(text, type = 'success') {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            messageDiv.textContent = text;
+            messageArea.appendChild(messageDiv);
+            
+            // Автоматически удалить сообщение через 5 секунд
+            setTimeout(() => {
+                if (messageDiv.parentNode) {
+                    messageDiv.style.opacity = '0';
+                    messageDiv.style.transition = 'opacity 0.3s';
+                    setTimeout(() => {
+                        if (messageDiv.parentNode) {
+                            messageDiv.remove();
+                        }
+                    }, 300);
+                }
+            }, 5000);
+        }
+        
+        // Копирование в буфер обмена
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).catch(() => {
+                // Fallback для старых браузеров
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            });
+        }
+        
+        // Генерация ключей
+        async function generateKeys() {
+            try {
+                generateLoader.style.display = 'inline-block';
+                generateKeysBtn.disabled = true;
+                
+                cryptoKeys = await window.crypto.subtle.generateKey(
+                    {
+                        name: "RSA-OAEP",
+                        modulusLength: 2048,
+                        publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+                        hash: "SHA-256"
+                    },
+                    true,
+                    ["encrypt", "decrypt"]
+                );
+                
+                await saveKeys();
+                await updateKeyDisplay();
+                updateUI();
+                
+                showMessage('✅ Ключи успешно сгенерированы и сохранены');
+            } catch (error) {
+                console.error('Ошибка при генерации ключей:', error);
+                showMessage('❌ Ошибка при генерации ключей: ' + error.message, 'error');
+            } finally {
+                generateLoader.style.display = 'none';
+                generateKeysBtn.disabled = false;
+            }
+        }
+        
+        // Сохранение ключей в локальное хранилище
+        async function saveKeys() {
+            if (!cryptoKeys) return;
+            
+            try {
+                const privateKeyData = await window.crypto.subtle.exportKey("pkcs8", cryptoKeys.privateKey);
+                const publicKeyData = await window.crypto.subtle.exportKey("spki", cryptoKeys.publicKey);
+                
+                const privateKeyBase64 = arrayBufferToBase64(privateKeyData);
+                const publicKeyBase64 = arrayBufferToBase64(publicKeyData);
+                
+                localStorage.setItem('rsaPrivateKey', privateKeyBase64);
+                localStorage.setItem('rsaPublicKey', publicKeyBase64);
+                
+                console.log('Ключи сохранены в localStorage');
+            } catch (error) {
+                console.error('Ошибка при сохранении ключей:', error);
+                showMessage('❌ Ошибка при сохранении ключей: ' + error.message, 'error');
+            }
+        }
+        
+        // Загрузка ключей из локального хранилища
+        async function loadFromStorage() {
+            try {
+                const privateKeyBase64 = localStorage.getItem('rsaPrivateKey');
+                const publicKeyBase64 = localStorage.getItem('rsaPublicKey');
+                
+                if (!privateKeyBase64 || !publicKeyBase64) {
+                    showMessage('ℹ️ Ключи не найдены в хранилище. Сначала сгенерируйте их.', 'warning');
+                    loadTextState(); // Загружаем текст даже если ключей нет
+                    return;
+                }
+                
+                await importKeysFromData(privateKeyBase64, publicKeyBase64);
+                showMessage('✅ Ключи успешно загружены из хранилища');
+            } catch (error) {
+                console.error('Ошибка при загрузке ключей:', error);
+                showMessage('❌ Ошибка при загрузке ключей: ' + error.message, 'error');
+            }
+        }
+        
+        // Обновление отображения ключей
+        async function updateKeyDisplay() {
+            if (!cryptoKeys) return;
+            
+            try {
+                const privateKeyData = await window.crypto.subtle.exportKey("pkcs8", cryptoKeys.privateKey);
+                const publicKeyData = await window.crypto.subtle.exportKey("spki", cryptoKeys.publicKey);
+                
+                const privateKeyBase64 = arrayBufferToBase64(privateKeyData);
+                const publicKeyBase64 = arrayBufferToBase64(publicKeyData);
+                
+                privateKeyDisplay.textContent = formatKey(privateKeyBase64);
+                publicKeyDisplay.textContent = formatKey(publicKeyBase64);
+            } catch (error) {
+                console.error('Ошибка при обновлении отображения ключей:', error);
+            }
+        }
+        
+        // Форматирование ключа для отображения
+        function formatKey(keyBase64) {
+            return keyBase64.match(/.{1,64}/g).join('\n');
+        }
+        
+        // Шифрование сообщения
+        async function encryptMessage() {
+            if (!cryptoKeys) {
+                showMessage('❌ Сначала загрузите или сгенерируйте ключи', 'error');
+                return;
+            }
+            
+            const message = messageToEncrypt.value.trim();
+            if (!message) {
+                showMessage('❌ Введите сообщение для шифрования', 'error');
+                messageToEncrypt.focus();
+                return;
+            }
+            
+            try {
+                encryptLoader.style.display = 'inline-block';
+                encryptBtn.disabled = true;
+                
+                const encoder = new TextEncoder();
+                const data = encoder.encode(message);
+                
+                const encrypted = await window.crypto.subtle.encrypt(
+                    { name: "RSA-OAEP" },
+                    cryptoKeys.publicKey,
+                    data
+                );
+                
+                const hexString = arrayBufferToHexString(encrypted);
+                encryptedResult.textContent = hexString;
+                
+                if (autoCopyEnabled) {
+                    messageToDecrypt.value = hexString;
+                    saveTextState();
+                }
+                
+                showMessage('✅ Сообщение успешно зашифровано');
+            } catch (error) {
+                console.error('Ошибка при шифровании:', error);
+                showMessage('❌ Ошибка при шифровании: ' + error.message, 'error');
+            } finally {
+                encryptLoader.style.display = 'none';
+                encryptBtn.disabled = false;
+            }
+        }
+        
+        // Дешифрование сообщения
+        async function decryptMessage() {
+            if (!cryptoKeys) {
+                showMessage('❌ Сначала загрузите или сгенерируйте ключи', 'error');
+                return;
+            }
+            
+            const encryptedHex = messageToDecrypt.value.trim();
+            if (!encryptedHex) {
+                showMessage('❌ Введите зашифрованное сообщение', 'error');
+                messageToDecrypt.focus();
+                return;
+            }
+            
+            if (!/^[0-9a-fA-F]+$/.test(encryptedHex)) {
+                showMessage('❌ Неверный формат. Используйте только hex-символы (0-9, a-f, A-F)', 'error');
+                messageToDecrypt.focus();
+                return;
+            }
+            
+            try {
+                decryptLoader.style.display = 'inline-block';
+                decryptBtn.disabled = true;
+                
+                const encryptedData = hexStringToArrayBuffer(encryptedHex);
+                
+                const decrypted = await window.crypto.subtle.decrypt(
+                    { name: "RSA-OAEP" },
+                    cryptoKeys.privateKey,
+                    encryptedData
+                );
+                
+                const decoder = new TextDecoder();
+                const decryptedMessage = decoder.decode(decrypted);
+                decryptedResult.textContent = decryptedMessage;
+                
+                showMessage('✅ Сообщение успешно расшифровано');
+            } catch (error) {
+                console.error('Ошибка при дешифровании:', error);
+                showMessage('❌ Ошибка при дешифровании: ' + error.message, 'error');
+            } finally {
+                decryptLoader.style.display = 'none';
+                decryptBtn.disabled = false;
+            }
+        }
+        
+        // Экспорт ключей
+        async function exportKeys() {
+            if (!cryptoKeys) {
+                showMessage('❌ Нет ключей для экспорта', 'error');
+                return;
+            }
+            
+            try {
+                const privateKeyData = await window.crypto.subtle.exportKey("pkcs8", cryptoKeys.privateKey);
+                const publicKeyData = await window.crypto.subtle.exportKey("spki", cryptoKeys.publicKey);
+                
+                const privateKeyBase64 = arrayBufferToBase64(privateKeyData);
+                const publicKeyBase64 = arrayBufferToBase64(publicKeyData);
+                
+                const exportData = {
+                    privateKey: privateKeyBase64,
+                    publicKey: publicKeyBase64,
+                    timestamp: new Date().toISOString(),
+                    format: 'RSA-OAEP 2048'
+                };
+                
+                const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `rsa-keys-${new Date().toISOString().split('T')[0]}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                showMessage('✅ Ключи экспортированы в файл');
+            } catch (error) {
+                console.error('Ошибка при экспорте ключей:', error);
+                showMessage('❌ Ошибка при экспорте ключей: ' + error.message, 'error');
+            }
+        }
+        
+        // Очистка ключей
+        function clearKeys() {
+            if (!confirm('Вы уверены, что хотите очистить все ключи? Это действие нельзя отменить.')) {
+                return;
+            }
+            
+            cryptoKeys = null;
+            localStorage.removeItem('rsaPrivateKey');
+            localStorage.removeItem('rsaPublicKey');
+            localStorage.removeItem('rsaTextState');
+            
+            privateKeyDisplay.textContent = 'Ключ не загружен';
+            publicKeyDisplay.textContent = 'Ключ не загружен';
+            messageToEncrypt.value = '';
+            messageToDecrypt.value = '';
+            encryptedResult.textContent = 'Здесь будет отображен результат шифрования';
+            decryptedResult.textContent = 'Здесь будет отображен результат дешифрования';
+            fileInputContainer.style.display = 'none';
+            
+            updateUI();
+            showMessage('🗑️ Все ключи и данные очищены');
+        }
+        
+        // Вспомогательные функции для конвертации
+        function arrayBufferToBase64(buffer) {
+            const bytes = new Uint8Array(buffer);
+            let binary = '';
+            for (let i = 0; i < bytes.byteLength; i++) {
+                binary += String.fromCharCode(bytes[i]);
+            }
+            return btoa(binary);
+        }
+        
+        function base64ToArrayBuffer(base64) {
+            const binary = atob(base64);
+            const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) {
+                bytes[i] = binary.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+        
+        function arrayBufferToHexString(buffer) {
+            const bytes = new Uint8Array(buffer);
+            let hex = '';
+            for (let i = 0; i < bytes.length; i++) {
+                const hexByte = bytes[i].toString(16).padStart(2, '0');
+                hex += hexByte;
+            }
+            return hex;
+        }
+        
+        function hexStringToArrayBuffer(hexString) {
+            const bytes = new Uint8Array(hexString.length / 2);
+            for (let i = 0; i < hexString.length; i += 2) {
+                bytes[i / 2] = parseInt(hexString.substr(i, 2), 16);
+            }
+            return bytes.buffer;
+        }
+        
+        // Запуск приложения
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
