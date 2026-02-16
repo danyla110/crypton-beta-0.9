@@ -6,6 +6,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#667eea">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>Криптон</title>
     <style>
         * {
@@ -85,7 +86,7 @@
             border: none;
             padding: 14px 20px;
             min-height: 48px;
-            min-width: 44px;
+            min-width: 48px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 16px;
@@ -132,7 +133,7 @@
             background-color: #f8f9fa;
             border: 1px solid #e9ecef;
             border-radius: 8px;
-            padding: 50px 15px 15px 15px;
+            padding: 15px;
             margin-top: 10px;
             word-break: break-all;
             font-family: monospace;
@@ -142,20 +143,31 @@
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
+        .result-wrapper.has-data .result {
+            padding: 42px 15px 15px 15px;
+        }
+        /* Кнопка скрыта, когда данных нет */
         .copy-btn {
+            display: none;
+        }
+        /* Кнопка появляется и компактная, когда есть данные (min 48px для Android touch target) */
+        .result-wrapper.has-data .copy-btn,
+        .key-display-wrapper.has-data .copy-btn {
+            display: inline-block;
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 8px;
+            right: 8px;
             background: rgba(255,255,255,0.95);
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
             padding: 10px 14px;
-            min-height: 44px;
             font-size: 14px;
+            min-height: 44px;
+            min-width: 44px;
             cursor: pointer;
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
         @media (hover: hover) {
             .copy-btn:hover {
@@ -190,6 +202,9 @@
             border: 1px solid #e9ecef;
             max-height: 150px;
             -webkit-overflow-scrolling: touch;
+        }
+        .key-display-wrapper.has-data .key-display {
+            padding-top: 42px;
         }
         .message {
             padding: 12px 15px;
@@ -265,6 +280,7 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+            pointer-events: none;
         }
         .btn:disabled:hover,
         .btn:disabled:active {
@@ -285,9 +301,17 @@
             gap: 10px;
         }
         .auto-copy input[type="checkbox"] {
-            min-width: 24px;
-            min-height: 24px;
+            min-width: 28px;
+            min-height: 28px;
             margin: 0;
+            cursor: pointer;
+        }
+        .auto-copy label {
+            cursor: pointer;
+            padding: 10px 0;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
         }
         .file-input-container,
         .paste-keys-container {
@@ -296,6 +320,15 @@
             background-color: #f8f9fa;
             border-radius: 8px;
             border: 1px solid #e9ecef;
+        }
+        .file-input-container label {
+            display: block;
+            padding: 12px 0;
+            min-height: 48px;
+        }
+        .file-input-container input[type="file"] {
+            min-height: 48px;
+            padding: 12px;
         }
         .paste-keys-container textarea {
             min-height: 80px;
@@ -322,6 +355,7 @@
     </style>
 </head>
 <body>
+    <noscript><div style="padding:20px;margin:20px;background:#f8d7da;border:1px solid #f5c6cb;border-radius:8px;">Для работы приложения включите JavaScript в браузере или откройте этот файл в Chrome / Edge / Firefox (двойной клик по файлу).</div></noscript>
     <h1>🔐 Криптон. RSA Шифрование и Дешифрование</h1>
     
     <div class="container">
@@ -332,14 +366,14 @@
         </div>
         
         <div class="action-buttons">
-            <button id="generateKeys" class="btn">
+            <button type="button" id="generateKeys" class="btn" onclick="window.CryptonRun('generateKeys'); return false;">
                 <span class="loader" id="generateLoader" style="display: none;"></span>
                 Сгенерировать новые ключи
             </button>
-            <button id="loadKeys" class="btn">Загрузить ключи из файла</button>
-            <button id="pasteKeys" class="btn">Вставить ключи вручную</button>
-            <button id="clearKeys" class="btn btn-danger">Очистить ключи</button>
-            <button id="exportKeys" class="btn btn-secondary">Экспорт ключей</button>
+            <button type="button" id="loadKeys" class="btn" onclick="window.CryptonRun('loadKeys'); return false;">Загрузить ключи из файла</button>
+            <button type="button" id="pasteKeys" class="btn" onclick="window.CryptonRun('pasteKeys'); return false;">Вставить ключи вручную</button>
+            <button type="button" id="clearKeys" class="btn btn-danger" onclick="window.CryptonRun('clearKeys'); return false;">Очистить ключи</button>
+            <button type="button" id="exportKeys" class="btn btn-secondary" onclick="window.CryptonRun('exportKeys'); return false;">Экспорт ключей</button>
         </div>
         
         <div class="file-input-container" id="fileInputContainer" style="display: none;">
@@ -358,15 +392,15 @@
                 <label for="pastePublicKey">Публичный ключ (Base64):</label>
                 <textarea id="pastePublicKey" placeholder="Вставьте публичный ключ в формате Base64..." rows="4"></textarea>
             </div>
-            <button id="applyPastedKeys" class="btn btn-success">Применить ключи</button>
-            <button id="cancelPasteKeys" class="btn btn-secondary">Отмена</button>
+            <button type="button" id="applyPastedKeys" class="btn btn-success" onclick="window.CryptonRun('applyPastedKeys'); return false;">Применить ключи</button>
+            <button type="button" id="cancelPasteKeys" class="btn btn-secondary" onclick="window.CryptonRun('cancelPasteKeys'); return false;">Отмена</button>
         </div>
         
         <div class="form-group">
             <label>🔑 Приватный ключ:</label>
             <div class="key-display-wrapper">
                 <div id="privateKeyDisplay" class="key-display">Ключ не загружен</div>
-                <button class="copy-btn" data-target="privateKeyDisplay">Копировать</button>
+                <button type="button" class="copy-btn" data-target="privateKeyDisplay" aria-label="Копировать приватный ключ" onclick="window.CryptonRun('copy','privateKeyDisplay'); return false;">Копировать</button>
             </div>
         </div>
         
@@ -374,7 +408,7 @@
             <label>🔓 Публичный ключ:</label>
             <div class="key-display-wrapper">
                 <div id="publicKeyDisplay" class="key-display">Ключ не загружен</div>
-                <button class="copy-btn" data-target="publicKeyDisplay">Копировать</button>
+                <button type="button" class="copy-btn" data-target="publicKeyDisplay" aria-label="Копировать публичный ключ" onclick="window.CryptonRun('copy','publicKeyDisplay'); return false;">Копировать</button>
             </div>
         </div>
     </div>
@@ -392,7 +426,7 @@
             <label for="autoCopyEncrypted">Автоматически копировать результат в поле дешифрования</label>
         </div>
         
-        <button id="encryptBtn" class="btn btn-success">
+        <button type="button" id="encryptBtn" class="btn btn-success" onclick="window.CryptonRun('encrypt'); return false;">
             <span class="loader" id="encryptLoader" style="display: none;"></span>
             Зашифровать
         </button>
@@ -401,7 +435,7 @@
             <label>Зашифрованное сообщение (hex):</label>
             <div class="result-wrapper">
                 <div id="encryptedResult" class="result">Здесь будет отображен результат шифрования</div>
-                <button class="copy-btn" data-target="encryptedResult">Копировать</button>
+                <button type="button" class="copy-btn" data-target="encryptedResult" aria-label="Копировать зашифрованный текст" onclick="window.CryptonRun('copy','encryptedResult'); return false;">Копировать</button>
             </div>
         </div>
     </div>
@@ -414,7 +448,7 @@
             <div class="example-text">Пример: 4a8f1e... или h1... для гибридного формата (hex)</div>
         </div>
         
-        <button id="decryptBtn" class="btn btn-success">
+        <button type="button" id="decryptBtn" class="btn btn-success" onclick="window.CryptonRun('decrypt'); return false;">
             <span class="loader" id="decryptLoader" style="display: none;"></span>
             Дешифровать
         </button>
@@ -423,7 +457,7 @@
             <label>Расшифрованное сообщение:</label>
             <div class="result-wrapper">
                 <div id="decryptedResult" class="result">Здесь будет отображен результат дешифрования</div>
-                <button class="copy-btn" data-target="decryptedResult">Копировать</button>
+                <button type="button" class="copy-btn" data-target="decryptedResult" aria-label="Копировать расшифрованный текст" onclick="window.CryptonRun('copy','decryptedResult'); return false;">Копировать</button>
             </div>
         </div>
     </div>
@@ -444,79 +478,137 @@
     <div id="messageArea"></div>
 
     <script>
+        // Единая точка входа для всех кнопок (работает и в средстве просмотра HTML)
+        window.CryptonRun = function(action, arg) {
+            if (window.CryptonHandlers && window.CryptonHandlers[action]) {
+                try { window.CryptonHandlers[action](arg); } catch (e) { alert('Ошибка: ' + (e.message || e)); }
+            }
+        };
+        window.CryptonHandlers = {};
+
         // Глобальные переменные для хранения ключей
-        let cryptoKeys = null;
-        let autoCopyEnabled = true;
+        var cryptoKeys = null;
+        var autoCopyEnabled = true;
         
-        // Элементы DOM
-        const generateKeysBtn = document.getElementById('generateKeys');
-        const loadKeysBtn = document.getElementById('loadKeys');
-        const clearKeysBtn = document.getElementById('clearKeys');
-        const exportKeysBtn = document.getElementById('exportKeys');
-        const encryptBtn = document.getElementById('encryptBtn');
-        const decryptBtn = document.getElementById('decryptBtn');
-        const messageToEncrypt = document.getElementById('messageToEncrypt');
-        const messageToDecrypt = document.getElementById('messageToDecrypt');
-        const encryptedResult = document.getElementById('encryptedResult');
-        const decryptedResult = document.getElementById('decryptedResult');
-        const privateKeyDisplay = document.getElementById('privateKeyDisplay');
-        const publicKeyDisplay = document.getElementById('publicKeyDisplay');
-        const messageArea = document.getElementById('messageArea');
-        const keyStatusIndicator = document.getElementById('keyStatusIndicator');
-        const keyStatusText = document.getElementById('keyStatusText');
-        const generateLoader = document.getElementById('generateLoader');
-        const encryptLoader = document.getElementById('encryptLoader');
-        const decryptLoader = document.getElementById('decryptLoader');
-        const autoCopyCheckbox = document.getElementById('autoCopyEncrypted');
-        const fileInputContainer = document.getElementById('fileInputContainer');
-        const keyFileInput = document.getElementById('keyFileInput');
-        const pasteKeysBtn = document.getElementById('pasteKeys');
-        const pasteKeysContainer = document.getElementById('pasteKeysContainer');
-        const pastePrivateKeyInput = document.getElementById('pastePrivateKey');
-        const pastePublicKeyInput = document.getElementById('pastePublicKey');
-        const applyPastedKeysBtn = document.getElementById('applyPastedKeys');
-        const cancelPasteKeysBtn = document.getElementById('cancelPasteKeys');
+        // Элементы DOM (получаем после определения CryptonRun)
+        var generateKeysBtn = document.getElementById('generateKeys');
+        var loadKeysBtn = document.getElementById('loadKeys');
+        var clearKeysBtn = document.getElementById('clearKeys');
+        var exportKeysBtn = document.getElementById('exportKeys');
+        var encryptBtn = document.getElementById('encryptBtn');
+        var decryptBtn = document.getElementById('decryptBtn');
+        var messageToEncrypt = document.getElementById('messageToEncrypt');
+        var messageToDecrypt = document.getElementById('messageToDecrypt');
+        var encryptedResult = document.getElementById('encryptedResult');
+        var decryptedResult = document.getElementById('decryptedResult');
+        var privateKeyDisplay = document.getElementById('privateKeyDisplay');
+        var publicKeyDisplay = document.getElementById('publicKeyDisplay');
+        var messageArea = document.getElementById('messageArea');
+        var keyStatusIndicator = document.getElementById('keyStatusIndicator');
+        var keyStatusText = document.getElementById('keyStatusText');
+        var generateLoader = document.getElementById('generateLoader');
+        var encryptLoader = document.getElementById('encryptLoader');
+        var decryptLoader = document.getElementById('decryptLoader');
+        var autoCopyCheckbox = document.getElementById('autoCopyEncrypted');
+        var fileInputContainer = document.getElementById('fileInputContainer');
+        var keyFileInput = document.getElementById('keyFileInput');
+        var pasteKeysBtn = document.getElementById('pasteKeys');
+        var pasteKeysContainer = document.getElementById('pasteKeysContainer');
+        var pastePrivateKeyInput = document.getElementById('pastePrivateKey');
+        var pastePublicKeyInput = document.getElementById('pastePublicKey');
+        var applyPastedKeysBtn = document.getElementById('applyPastedKeys');
+        var cancelPasteKeysBtn = document.getElementById('cancelPasteKeys');
         
         // Инициализация
-        async function init() {
-            setupEventListeners(); // Всегда настраиваем обработчики
-            loadTextState();
-            if (!window.crypto || !window.crypto.subtle) {
-                showMessage('❌ Web Crypto API недоступна. Откройте страницу по HTTPS.', 'error');
-                return;
+        function init() {
+            try {
+                if (!messageArea) {
+                    document.body.innerHTML = '<p style="padding:20px;color:red;">Ошибка: не найден контейнер сообщений.</p>';
+                    return;
+                }
+                window.CryptonHandlers = {
+                    generateKeys: generateKeys,
+                    loadKeys: showFileInput,
+                    pasteKeys: showPasteKeysInput,
+                    clearKeys: clearKeys,
+                    exportKeys: exportKeys,
+                    applyPastedKeys: applyPastedKeys,
+                    cancelPasteKeys: hidePasteKeysInput,
+                    encrypt: encryptMessage,
+                    decrypt: decryptMessage,
+                    copy: function(targetId) {
+                        var el = document.getElementById(targetId);
+                        if (!el) return;
+                        var text = (el.textContent || '').trim();
+                        if (!text || text.indexOf('Здесь будет') === 0 || text === 'Ключ не загружен') {
+                            showMessage('Нет данных для копирования', 'warning');
+                            return;
+                        }
+                        copyToClipboard(text);
+                        showMessage('Текст скопирован в буфер обмена', 'success');
+                    }
+                };
+                setupEventListeners();
+                loadTextState();
+                if (!window.crypto || !window.crypto.subtle) {
+                    showMessage('❌ Web Crypto API недоступна. Откройте файл в браузере (Chrome, Edge) по адресу http://localhost или через двойной клик по файлу.', 'error');
+                    updateUI();
+                    return;
+                }
+                loadFromStorage(true).then(function() { updateUI(); }).catch(function(e) { showMessage('Ошибка загрузки ключей: ' + e.message, 'error'); updateUI(); });
+                updateUI();
+            } catch (err) {
+                if (messageArea) {
+                    var div = document.createElement('div');
+                    div.className = 'message error';
+                    div.textContent = 'Ошибка загрузки: ' + (err.message ? err.message : String(err));
+                    messageArea.appendChild(div);
+                }
             }
-            await loadFromStorage(true); // Загрузить ключи при загрузке страницы
-            updateUI();
+        }
+        
+        // Привязка кнопки: click + touchend для Android (один вызов на нажатие)
+        function bindButton(el, handler) {
+            if (!el || typeof handler !== 'function') return;
+            var lastTap = 0;
+            function run(e) {
+                if (e && e.type === 'touchend') e.preventDefault();
+                var now = Date.now();
+                if (now - lastTap < 350) return;
+                lastTap = now;
+                handler(e);
+            }
+            el.addEventListener('click', run);
+            el.addEventListener('touchend', run, { passive: false });
         }
         
         // Настройка обработчиков событий
         function setupEventListeners() {
-            generateKeysBtn.addEventListener('click', generateKeys);
-            loadKeysBtn.addEventListener('click', showFileInput);
-            pasteKeysBtn.addEventListener('click', showPasteKeysInput);
-            applyPastedKeysBtn.addEventListener('click', applyPastedKeys);
-            cancelPasteKeysBtn.addEventListener('click', hidePasteKeysInput);
-            clearKeysBtn.addEventListener('click', clearKeys);
-            exportKeysBtn.addEventListener('click', exportKeys);
-            encryptBtn.addEventListener('click', encryptMessage);
-            decryptBtn.addEventListener('click', decryptMessage);
+            bindButton(generateKeysBtn, generateKeys);
+            bindButton(loadKeysBtn, showFileInput);
+            bindButton(pasteKeysBtn, showPasteKeysInput);
+            bindButton(applyPastedKeysBtn, applyPastedKeys);
+            bindButton(cancelPasteKeysBtn, hidePasteKeysInput);
+            bindButton(clearKeysBtn, clearKeys);
+            bindButton(exportKeysBtn, exportKeys);
+            bindButton(encryptBtn, encryptMessage);
+            bindButton(decryptBtn, decryptMessage);
             
-            // Обработчик выбора файла
-            keyFileInput.addEventListener('change', handleFileSelect);
+            if (keyFileInput) keyFileInput.addEventListener('change', handleFileSelect);
+            if (autoCopyCheckbox) {
+                autoCopyCheckbox.addEventListener('change', function(e) {
+                    autoCopyEnabled = e.target.checked;
+                });
+            }
             
-            // Автоматическое копирование
-            autoCopyCheckbox.addEventListener('change', (e) => {
-                autoCopyEnabled = e.target.checked;
-            });
-            
-            // Кнопки копирования
-            document.querySelectorAll('.copy-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const targetId = this.getAttribute('data-target');
-                    const targetElement = document.getElementById(targetId);
+            document.querySelectorAll('.copy-btn').forEach(function(btn) {
+                bindButton(btn, function(ev) {
+                    var button = ev && ev.currentTarget ? ev.currentTarget : btn;
+                    var targetId = button.getAttribute('data-target');
+                    var targetElement = document.getElementById(targetId);
                     if (!targetElement) return;
-                    const text = targetElement.textContent?.trim() || '';
-                    if (!text || text.startsWith('Здесь будет') || text === 'Ключ не загружен') {
+                    var text = (targetElement.textContent || '').trim();
+                    if (!text || text.indexOf('Здесь будет') === 0 || text === 'Ключ не загружен') {
                         showMessage('Нет данных для копирования', 'warning');
                         return;
                     }
@@ -525,28 +617,18 @@
                 });
             });
             
-            // Валидация hex-ввода (допускается префикс "h1" для гибридного формата)
-            messageToDecrypt.addEventListener('input', function() {
-                const value = this.value.trim();
-                if (!value) {
+            if (messageToDecrypt) {
+                messageToDecrypt.addEventListener('input', function() {
+                    var value = (this.value || '').trim();
+                    if (!value) { this.style.borderColor = '#e1e8ed'; return; }
+                    var hexPart = value.indexOf('h1') === 0 ? value.slice(2) : value;
+                    if (!/^(h1)?[0-9a-fA-F]*$/.test(value)) { this.style.borderColor = '#e74c3c'; return; }
+                    if (hexPart.length % 2 !== 0) { this.style.borderColor = '#f39c12'; return; }
                     this.style.borderColor = '#e1e8ed';
-                    return;
-                }
-                const hexPart = value.startsWith('h1') ? value.slice(2) : value;
-                if (!/^(h1)?[0-9a-fA-F]*$/.test(value)) {
-                    this.style.borderColor = '#e74c3c';
-                    return;
-                }
-                if (hexPart.length % 2 !== 0) {
-                    this.style.borderColor = '#f39c12'; // оранжевый - неполный байт
-                    return;
-                }
-                this.style.borderColor = '#e1e8ed';
-            });
-            
-            // Сохранение текста при перезагрузке
-            messageToEncrypt.addEventListener('input', debounce(saveTextState, 500));
-            messageToDecrypt.addEventListener('input', debounce(saveTextState, 500));
+                });
+            }
+            if (messageToEncrypt) messageToEncrypt.addEventListener('input', debounce(saveTextState, 500));
+            if (messageToDecrypt) messageToDecrypt.addEventListener('input', debounce(saveTextState, 500));
         }
         
         // Показать поле выбора файла
@@ -565,8 +647,8 @@
             pastePublicKeyInput.value = '';
             setTimeout(() => {
                 pastePrivateKeyInput.focus();
-                pastePrivateKeyInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
+                pastePrivateKeyInput.scrollIntoView({ behavior: 'auto', block: 'center' });
+            }, 150);
         }
         
         // Скрыть поле для вставки ключей
@@ -578,6 +660,7 @@
         
         // Применить вставленные ключи
         async function applyPastedKeys() {
+            if (applyPastedKeysBtn.disabled) return;
             const privateKeyBase64 = pastePrivateKeyInput.value.trim();
             const publicKeyBase64 = pastePublicKeyInput.value.trim();
             
@@ -722,29 +805,36 @@
             }
         }
         
+        // Обновление состояния кнопок «Копировать» (компактные при отсутствии данных)
+        const PLACEHOLDER_TEXTS = [
+            'Здесь будет отображен результат шифрования',
+            'Здесь будет отображен результат дешифрования',
+            'Ключ не загружен'
+        ];
+        function updateCopyButtonsState() {
+            document.querySelectorAll('.copy-btn').forEach(btn => {
+                const targetId = btn.getAttribute('data-target');
+                const target = document.getElementById(targetId);
+                const wrapper = btn.closest('.result-wrapper, .key-display-wrapper');
+                if (!target || !wrapper) return;
+                const text = (target.textContent || '').trim();
+                const hasData = text.length > 0 && !PLACEHOLDER_TEXTS.includes(text);
+                wrapper.classList.toggle('has-data', !!hasData);
+            });
+        }
+        
         // Обновление UI в зависимости от состояния
         function updateUI() {
-            const hasKeys = cryptoKeys !== null;
-            
-            // Обновление статуса ключей
-            if (hasKeys) {
-                keyStatusIndicator.className = 'status-indicator status-ready';
-                keyStatusText.textContent = 'Ключи загружены и готовы к использованию';
-                keyStatusText.style.color = '#27ae60';
-            } else {
-                keyStatusIndicator.className = 'status-indicator status-not-ready';
-                keyStatusText.textContent = 'Ключи не загружены';
-                keyStatusText.style.color = '#e74c3c';
+            var hasKeys = cryptoKeys !== null;
+            if (keyStatusIndicator) keyStatusIndicator.className = 'status-indicator ' + (hasKeys ? 'status-ready' : 'status-not-ready');
+            if (keyStatusText) {
+                keyStatusText.textContent = hasKeys ? 'Ключи загружены и готовы к использованию' : 'Ключи не загружены';
+                keyStatusText.style.color = hasKeys ? '#27ae60' : '#e74c3c';
             }
-            
-            // Активация/деактивация кнопок
-            encryptBtn.disabled = !hasKeys;
-            decryptBtn.disabled = !hasKeys;
-            exportKeysBtn.disabled = !hasKeys;
-            
-            // Визуальная обратная связь
-            encryptBtn.title = hasKeys ? '' : 'Сначала загрузите или сгенерируйте ключи';
-            decryptBtn.title = hasKeys ? '' : 'Сначала загрузите или сгенерируйте ключи';
+            if (encryptBtn) { encryptBtn.disabled = !hasKeys; encryptBtn.title = hasKeys ? '' : 'Сначала загрузите или сгенерируйте ключи'; }
+            if (decryptBtn) { decryptBtn.disabled = !hasKeys; decryptBtn.title = hasKeys ? '' : 'Сначала загрузите или сгенерируйте ключи'; }
+            if (exportKeysBtn) exportKeysBtn.disabled = !hasKeys;
+            updateCopyButtonsState();
         }
         
         // Показать сообщение
@@ -777,25 +867,25 @@
             }
         }
         function fallbackCopy(text) {
-            const textArea = document.createElement('textarea');
+            var textArea = document.createElement('textarea');
             textArea.value = text;
-            textArea.style.position = 'fixed';
-            textArea.style.left = '-9999px';
-            textArea.style.top = '0';
             textArea.setAttribute('readonly', '');
+            textArea.style.cssText = 'position:fixed;left:0;top:0;width:1px;height:1px;padding:0;border:0;outline:0;opacity:0.01;z-index:9999;';
             document.body.appendChild(textArea);
+            textArea.focus();
             textArea.select();
-            textArea.setSelectionRange(0, text.length);
+            textArea.setSelectionRange(0, (text || '').length);
             try {
                 document.execCommand('copy');
             } catch (e) {
                 console.warn('Копирование не удалось:', e);
             }
-            document.body.removeChild(textArea);
+            if (textArea.parentNode) textArea.parentNode.removeChild(textArea);
         }
         
         // Генерация ключей
         async function generateKeys() {
+            if (generateKeysBtn.disabled) return;
             try {
                 generateLoader.style.display = 'inline-block';
                 generateKeysBtn.disabled = true;
@@ -896,6 +986,7 @@
         
         // Шифрование сообщения
         async function encryptMessage() {
+            if (encryptBtn.disabled) return;
             if (!cryptoKeys) {
                 showMessage('❌ Сначала загрузите или сгенерируйте ключи', 'error');
                 return;
@@ -938,6 +1029,7 @@
                 }
                 
                 encryptedResult.textContent = hexString;
+                updateCopyButtonsState();
                 
                 if (autoCopyEnabled && hexString.length <= 500 * 1024) {
                     messageToDecrypt.value = hexString;
@@ -958,6 +1050,7 @@
         
         // Дешифрование сообщения
         async function decryptMessage() {
+            if (decryptBtn.disabled) return;
             if (!cryptoKeys) {
                 showMessage('❌ Сначала загрузите или сгенерируйте ключи', 'error');
                 return;
@@ -1004,6 +1097,7 @@
                 const decoder = new TextDecoder();
                 const decryptedMessage = decoder.decode(decrypted);
                 decryptedResult.textContent = decryptedMessage;
+                updateCopyButtonsState();
                 
                 showMessage('✅ Сообщение успешно расшифровано');
             } catch (error) {
@@ -1016,12 +1110,14 @@
         }
         
         // Экспорт ключей
+        let exportInProgress = false;
         async function exportKeys() {
             if (!cryptoKeys) {
                 showMessage('❌ Нет ключей для экспорта', 'error');
                 return;
             }
-            
+            if (exportInProgress) return;
+            exportInProgress = true;
             try {
                 const privateKeyData = await window.crypto.subtle.exportKey("pkcs8", cryptoKeys.privateKey);
                 const publicKeyData = await window.crypto.subtle.exportKey("spki", cryptoKeys.publicKey);
@@ -1038,19 +1134,41 @@
                 
                 const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
                 const url = URL.createObjectURL(blob);
+                const fileName = `rsa-keys-${new Date().toISOString().split('T')[0]}.json`;
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `rsa-keys-${new Date().toISOString().split('T')[0]}.json`;
+                a.download = fileName;
                 a.style.display = 'none';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
-                setTimeout(() => URL.revokeObjectURL(url), 100);
+                /* На Android programmatic click после async часто блокируется — показываем видимую ссылку */
+                const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+                if (isTouchDevice) {
+                    const fallbackLink = document.createElement('a');
+                    fallbackLink.href = url;
+                    fallbackLink.download = fileName;
+                    fallbackLink.textContent = '📥 Нажмите, чтобы скачать ключи';
+                    fallbackLink.className = 'message success';
+                    fallbackLink.style.display = 'block';
+                    fallbackLink.style.marginTop = '8px';
+                    messageArea.appendChild(fallbackLink);
+                    setTimeout(() => {
+                        if (fallbackLink.parentNode) {
+                            fallbackLink.remove();
+                        }
+                        URL.revokeObjectURL(url);
+                    }, 15000);
+                } else {
+                    setTimeout(() => URL.revokeObjectURL(url), 100);
+                }
                 
                 showMessage('✅ Ключи экспортированы в файл');
             } catch (error) {
                 console.error('Ошибка при экспорте ключей:', error);
                 showMessage('❌ Ошибка при экспорте ключей: ' + error.message, 'error');
+            } finally {
+                exportInProgress = false;
             }
         }
         
@@ -1075,6 +1193,7 @@
             hidePasteKeysInput();
             
             updateUI();
+            updateCopyButtonsState();
             showMessage('🗑️ Все ключи и данные очищены');
         }
         
@@ -1173,8 +1292,10 @@
             );
         }
         
-        // Запуск приложения
-        window.addEventListener('load', init);
+        // Запуск сразу (скрипт в конце body — DOM уже готов)
+        try { init(); } catch (e) {
+            document.body.insertAdjacentHTML('afterbegin', '<div class="message error" style="margin:20px;">Не удалось запустить приложение. Откройте этот файл в браузере (Chrome, Edge, Firefox): двойной клик по файлу или перетащите файл в окно браузера.</div>');
+        }
     </script>
 </body>
 </html>
