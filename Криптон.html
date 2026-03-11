@@ -14,9 +14,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
-        html {
-            overflow-x: hidden;
-        }
+        html { overflow-x: hidden; }
         body {
             max-width: 900px;
             margin: 0 auto;
@@ -47,13 +45,9 @@
             transition: transform 0.2s ease;
         }
         @media (hover: hover) {
-            .container:hover {
-                transform: translateY(-2px);
-            }
+            .container:hover { transform: translateY(-2px); }
         }
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 20px; }
         label {
             display: block;
             margin-bottom: 8px;
@@ -65,7 +59,7 @@
             padding: 14px 12px;
             border: 2px solid #e1e8ed;
             border-radius: 8px;
-            font-size: 16px; /* 16px предотвращает зум при фокусе на iOS */
+            font-size: 16px;
             transition: border-color 0.3s;
             -webkit-appearance: none;
             touch-action: manipulation;
@@ -105,30 +99,14 @@
                 box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             }
         }
-        .btn:active {
-            transform: scale(0.98);
-        }
-        .btn-danger {
-            background-color: #e74c3c;
-        }
-        .btn-danger:hover {
-            background-color: #c0392b;
-        }
-        .btn-success {
-            background-color: #2ecc71;
-        }
-        .btn-success:hover {
-            background-color: #27ae60;
-        }
-        .btn-secondary {
-            background-color: #95a5a6;
-        }
-        .btn-secondary:hover {
-            background-color: #7f8c8d;
-        }
-        .result-wrapper, .key-display-wrapper {
-            position: relative;
-        }
+        .btn:active { transform: scale(0.98); }
+        .btn-danger { background-color: #e74c3c; }
+        .btn-danger:hover { background-color: #c0392b; }
+        .btn-success { background-color: #2ecc71; }
+        .btn-success:hover { background-color: #27ae60; }
+        .btn-secondary { background-color: #95a5a6; }
+        .btn-secondary:hover { background-color: #7f8c8d; }
+        .result-wrapper, .key-display-wrapper { position: relative; }
         .result {
             background-color: #f8f9fa;
             border: 1px solid #e9ecef;
@@ -143,7 +121,6 @@
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
-        /* Кнопка «Копировать» — компактная, в строке с подписью */
         .copy-btn {
             display: none;
             background: rgba(255,255,255,0.95);
@@ -159,12 +136,7 @@
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
             flex-shrink: 0;
         }
-        .result-wrapper.has-data .result {
-            padding: 15px;
-        }
-        .result-wrapper.has-data .copy-btn {
-            display: inline-block;
-        }
+        .result-wrapper.has-data .copy-btn { display: inline-block; }
         .label-row {
             display: flex;
             align-items: center;
@@ -172,32 +144,8 @@
             gap: 10px;
             margin-bottom: 8px;
         }
-        .label-row label {
-            margin-bottom: 0;
-        }
-        .key-display-wrapper.has-data .label-row .copy-btn {
-            display: inline-block;
-        }
-        @media (hover: hover) {
-            .copy-btn:hover {
-                background: #f8f9fa;
-            }
-        }
-        .key-info {
-            font-size: 14px;
-            color: #7f8c8d;
-            margin-top: 5px;
-        }
-        .action-buttons {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .action-buttons .btn {
-            flex: 1 1 auto;
-            min-width: 140px;
-        }
+        .label-row label { margin-bottom: 0; }
+        .key-display-wrapper.has-data .label-row .copy-btn { display: inline-block; }
         .key-display {
             font-family: monospace;
             font-size: 12px;
@@ -222,141 +170,55 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-        .warning {
-            background-color: #fff3cd;
-            color: #856404;
-            border: 1px solid #ffeaa7;
-        }
-        .status-indicator {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-        .status-ready {
-            background-color: #2ecc71;
-        }
-        .status-not-ready {
-            background-color: #e74c3c;
-        }
-        .key-status {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        .key-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .input-with-button {
-            display: flex;
-            gap: 10px;
-        }
-        .input-with-button textarea {
-            flex: 1;
-        }
+        .success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        .status-indicator { display:inline-block; width:12px; height:12px; border-radius:50%; margin-right:8px; }
+        .status-ready { background-color:#2ecc71; }
+        .status-not-ready { background-color:#e74c3c; }
+        .key-status { display:flex; align-items:center; margin-bottom:10px; font-weight:600; }
+        .action-buttons { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px; }
+        .action-buttons .btn { flex: 1 1 auto; min-width: 140px; }
         .loader {
             display: inline-block;
-            width: 20px;
-            height: 20px;
+            width: 20px; height: 20px;
             border: 3px solid rgba(255,255,255,.3);
             border-radius: 50%;
             border-top-color: #fff;
             animation: spin 1s ease-in-out infinite;
             margin-right: 10px;
         }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .btn:disabled {
-            background-color: #bdc3c7;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-            pointer-events: none;
-        }
-        .btn:disabled:hover,
-        .btn:disabled:active {
-            background-color: #bdc3c7;
-            transform: none;
-            box-shadow: none;
-        }
-        .example-text {
-            font-size: 14px;
-            color: #7f8c8d;
-            margin-top: 5px;
-            font-style: italic;
-        }
-        .auto-copy {
-            display: flex;
-            align-items: center;
-            margin: 10px 0;
-            gap: 10px;
-        }
-        .auto-copy input[type="checkbox"] {
-            min-width: 28px;
-            min-height: 28px;
-            margin: 0;
-            cursor: pointer;
-        }
-        .auto-copy label {
-            cursor: pointer;
-            padding: 10px 0;
-            min-height: 48px;
-            display: flex;
-            align-items: center;
-        }
-        .file-input-container,
-        .paste-keys-container {
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .btn:disabled { background-color:#bdc3c7; cursor:not-allowed; transform:none; box-shadow:none; pointer-events:none; }
+        .example-text { font-size:14px; color:#7f8c8d; margin-top:5px; font-style:italic; }
+        .auto-copy { display:flex; align-items:center; margin:10px 0; gap:10px; }
+        .auto-copy input[type="checkbox"] { min-width:28px; min-height:28px; margin:0; cursor:pointer; }
+        .auto-copy label { cursor:pointer; padding:10px 0; min-height:48px; display:flex; align-items:center; }
+        .file-input-container, .paste-keys-container {
             margin: 15px 0;
             padding: 15px;
             background-color: #f8f9fa;
             border-radius: 8px;
             border: 1px solid #e9ecef;
         }
-        .file-input-container label {
-            display: block;
-            padding: 12px 0;
-            min-height: 48px;
-        }
-        .file-input-container input[type="file"] {
-            min-height: 48px;
-            padding: 12px;
-        }
-        .paste-keys-container textarea {
+        .file-info { font-size: 14px; color: #7f8c8d; margin-top: 5px; }
+        .preview {
+            display:flex;
+            align-items:center;
+            justify-content:center;
             min-height: 80px;
         }
-        .file-info {
-            font-size: 14px;
-            color: #7f8c8d;
-            margin-top: 5px;
-        }
-        .hidden {
-            display: none;
+        .preview img {
+            max-width:100%;
+            max-height:260px;
+            border-radius:8px;
+            object-fit:contain;
+            display:block;
         }
         @media (max-width: 480px) {
-            body {
-                padding: 12px;
-            }
-            .container {
-                padding: 16px;
-            }
-            .action-buttons .btn {
-                min-width: 100%;
-            }
+            body { padding: 12px; }
+            .container { padding: 16px; }
+            .action-buttons .btn { min-width: 100%; }
         }
     </style>
 </head>
@@ -475,6 +337,103 @@
             </div>
         </div>
     </div>
+
+    <!-- Добавлено: фото шифрование/дешифрование тем же гибридным алгоритмом (h1 + RSA(AES key) + IV + AES-GCM(data)) -->
+    <div class="container">
+        <h2>🖼️ Шифрование и дешифрование фото</h2>
+
+        <div class="form-group">
+            <label for="photoEncryptInput">Фото для шифрования (любой формат):</label>
+            <input type="file" id="photoEncryptInput" accept="image/*">
+            <div id="photoEncryptInfo" class="file-info">Файл не выбран</div>
+        </div>
+
+        <div class="action-buttons">
+            <button type="button" id="encryptPhotoBtn" class="btn btn-success" onclick="window.CryptonRun('encryptPhoto'); return false;">
+                <span class="loader" id="encryptPhotoLoader" style="display: none;"></span>
+                Зашифровать фото → `.krypton`
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.CryptonRun('clearPhotoEncrypt'); return false;">Очистить</button>
+        </div>
+
+        <div class="form-group">
+            <label>Предпросмотр исходного фото:</label>
+            <div id="photoOriginalPreview" class="result preview"><span style="color:#7f8c8d;">Нет изображения</span></div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid #e9ecef;margin:18px 0;">
+
+        <div class="form-group">
+            <label for="photoDecryptInput">Файл `.krypton`:</label>
+            <input type="file" id="photoDecryptInput" accept=".krypton,application/json,text/plain,application/octet-stream">
+            <div id="photoDecryptInfo" class="file-info">Файл не выбран</div>
+        </div>
+
+        <div class="action-buttons">
+            <button type="button" id="decryptPhotoBtn" class="btn btn-success" onclick="window.CryptonRun('decryptPhoto'); return false;">
+                <span class="loader" id="decryptPhotoLoader" style="display: none;"></span>
+                Дешифровать `.krypton` → фото
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.CryptonRun('clearPhotoDecrypt'); return false;">Очистить</button>
+        </div>
+
+        <div class="form-group">
+            <label>Предпросмотр расшифрованного фото:</label>
+            <div id="photoDecryptedPreview" class="result preview"><span style="color:#7f8c8d;">Нет изображения</span></div>
+        </div>
+
+        <div class="file-info">Алгоритм такой же, как для длинного текста: AES‑GCM для данных + RSA‑OAEP для AES‑ключа. В файле `.krypton` хранится JSON с метаданными и строкой `h1...`.</div>
+    </div>
+
+    <div class="container">
+        <h2>🎬 Шифрование и дешифрование видео</h2>
+
+        <div class="form-group">
+            <label for="videoEncryptInput">Видео для шифрования (любой формат):</label>
+            <input type="file" id="videoEncryptInput" accept="video/*">
+            <div id="videoEncryptInfo" class="file-info">Файл не выбран</div>
+        </div>
+
+        <div class="action-buttons">
+            <button type="button" id="encryptVideoBtn" class="btn btn-success" onclick="window.CryptonRun('encryptVideo'); return false;">
+                <span class="loader" id="encryptVideoLoader" style="display: none;"></span>
+                Зашифровать видео → `.krypton`
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.CryptonRun('clearVideoEncrypt'); return false;">Очистить</button>
+        </div>
+
+        <div class="form-group">
+            <label>Предпросмотр исходного видео:</label>
+            <div id="videoOriginalPreview" class="result preview">
+                <span style="color:#7f8c8d;">Нет видео</span>
+            </div>
+        </div>
+
+        <hr style="border:none;border-top:1px solid #e9ecef;margin:18px 0;">
+
+        <div class="form-group">
+            <label for="videoDecryptInput">Файл `.krypton` с видео:</label>
+            <input type="file" id="videoDecryptInput" accept=".krypton,application/json,text/plain,application/octet-stream">
+            <div id="videoDecryptInfo" class="file-info">Файл не выбран</div>
+        </div>
+
+        <div class="action-buttons">
+            <button type="button" id="decryptVideoBtn" class="btn btn-success" onclick="window.CryptonRun('decryptVideo'); return false%;">
+                <span class="loader" id="decryptVideoLoader" style="display: none;"></span>
+                Дешифровать `.krypton` → видео
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.CryptonRun('clearVideoDecrypt'); return false;">Очистить</button>
+        </div>
+
+        <div class="form-group">
+            <label>Предпросмотр расшифрованного видео:</label>
+            <div id="videoDecryptedPreview" class="result preview">
+                <span style="color:#7f8c8d;">Нет видео</span>
+            </div>
+        </div>
+
+        <div class="file-info">Используется тот же гибридный шифр, что и для текста/фото: AES‑GCM + RSA‑OAEP (строка `h1...` в JSON `.krypton`).</div>
+    </div>
     
     <div class="container">
         <h2>💡 Советы по использованию</h2>
@@ -492,7 +451,6 @@
     <div id="messageArea"></div>
 
     <script>
-        // Единая точка входа для всех кнопок (работает и в средстве просмотра HTML)
         window.CryptonRun = function(action, arg) {
             if (window.CryptonHandlers && window.CryptonHandlers[action]) {
                 try { window.CryptonHandlers[action](arg); } catch (e) { alert('Ошибка: ' + (e.message || e)); }
@@ -501,13 +459,9 @@
         window.CryptonHandlers = {};
 
         var cryptoKeys = null;
-        var autoCopyEnabled = true;
         window.autoCopyEnabled = true;
-        
-        // Элементы DOM (получаем после определения CryptonRun)
+
         var generateKeysBtn = document.getElementById('generateKeys');
-        var loadKeysBtn = document.getElementById('loadKeys');
-        var clearKeysBtn = document.getElementById('clearKeys');
         var exportKeysBtn = document.getElementById('exportKeys');
         var encryptBtn = document.getElementById('encryptBtn');
         var decryptBtn = document.getElementById('decryptBtn');
@@ -523,89 +477,46 @@
         var generateLoader = document.getElementById('generateLoader');
         var encryptLoader = document.getElementById('encryptLoader');
         var decryptLoader = document.getElementById('decryptLoader');
-        var autoCopyCheckbox = document.getElementById('autoCopyEncrypted');
-        var fileInputContainer = document.getElementById('fileInputContainer');
-        var keyFileInput = document.getElementById('keyFileInput');
-        var pasteKeysBtn = document.getElementById('pasteKeys');
-        var pasteKeysContainer = document.getElementById('pasteKeysContainer');
-        var pastePrivateKeyInput = document.getElementById('pastePrivateKey');
-        var pastePublicKeyInput = document.getElementById('pastePublicKey');
-        var applyPastedKeysBtn = document.getElementById('applyPastedKeys');
-        var cancelPasteKeysBtn = document.getElementById('cancelPasteKeys');
-        
-        // Инициализация
-        function init() {
-            try {
-                if (!messageArea) {
-                    document.body.innerHTML = '<p style="padding:20px;color:red;">Ошибка: не найден контейнер сообщений.</p>';
-                    return;
-                }
-                window.CryptonHandlers = {
-                    generateKeys: generateKeys,
-                    loadKeys: showFileInput,
-                    pasteKeys: showPasteKeysInput,
-                    clearKeys: clearKeys,
-                    exportKeys: exportKeys,
-                    applyPastedKeys: applyPastedKeys,
-                    cancelPasteKeys: hidePasteKeysInput,
-                    encrypt: encryptMessage,
-                    decrypt: decryptMessage,
-                    fileSelect: function(inputEl) { handleFileSelect({ target: inputEl }); },
-                    copy: function(targetId) {
-                        var el = document.getElementById(targetId);
-                        if (!el) return;
-                        var text = (el.textContent || '').trim();
-                        if (!text || text.indexOf('Здесь будет') === 0 || text === 'Ключ не загружен') {
-                            showMessage('Нет данных для копирования', 'warning');
-                            return;
-                        }
-                        copyToClipboard(text);
-                        showMessage('Текст скопирован в буфер обмена', 'success');
-                    }
-                };
-                if (typeof document.addEventListener === 'function') setupEventListeners();
-                loadTextState();
-                if (!window.crypto || !window.crypto.subtle) {
-                    showMessage('❌ Web Crypto API недоступна. Откройте файл в браузере (Chrome, Edge) или по адресу http://localhost.', 'error');
-                    updateUI();
-                    return;
-                }
-                if (typeof Promise !== 'undefined') {
-                    loadFromStorage(true).then(function() { updateUI(); }).catch(function(e) { showMessage('Ошибка загрузки ключей: ' + (e && e.message ? e.message : e), 'error'); updateUI(); });
-                } else {
-                    updateUI();
-                }
-                updateUI();
-            } catch (err) {
-                if (messageArea) {
-                    var div = document.createElement('div');
-                    div.className = 'message error';
-                    div.textContent = 'Ошибка загрузки: ' + (err.message ? err.message : String(err));
-                    messageArea.appendChild(div);
-                }
-            }
+
+        // Фото DOM
+        var photoEncryptInput = document.getElementById('photoEncryptInput');
+        var photoDecryptInput = document.getElementById('photoDecryptInput');
+        var photoEncryptInfo = document.getElementById('photoEncryptInfo');
+        var photoDecryptInfo = document.getElementById('photoDecryptInfo');
+        var encryptPhotoBtn = document.getElementById('encryptPhotoBtn');
+        var decryptPhotoBtn = document.getElementById('decryptPhotoBtn');
+        var encryptPhotoLoader = document.getElementById('encryptPhotoLoader');
+        var decryptPhotoLoader = document.getElementById('decryptPhotoLoader');
+        var photoOriginalPreview = document.getElementById('photoOriginalPreview');
+        var photoDecryptedPreview = document.getElementById('photoDecryptedPreview');
+        var lastPhotoOriginalUrl = null;
+        var lastPhotoDecryptedUrl = null;
+
+        // Видео DOM
+        var videoEncryptInput = document.getElementById('videoEncryptInput');
+        var videoDecryptInput = document.getElementById('videoDecryptInput');
+        var videoEncryptInfo = document.getElementById('videoEncryptInfo');
+        var videoDecryptInfo = document.getElementById('videoDecryptInfo');
+        var encryptVideoBtn = document.getElementById('encryptVideoBtn');
+        var decryptVideoBtn = document.getElementById('decryptVideoBtn');
+        var encryptVideoLoader = document.getElementById('encryptVideoLoader');
+        var decryptVideoLoader = document.getElementById('decryptVideoLoader');
+        var videoOriginalPreview = document.getElementById('videoOriginalPreview');
+        var videoDecryptedPreview = document.getElementById('videoDecryptedPreview');
+        var lastVideoOriginalUrl = null;
+        var lastVideoDecryptedUrl = null;
+
+        function debounce(func, wait) {
+            var timeout;
+            return function() {
+                var later = function() { clearTimeout(timeout); func(); };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
         }
-        
-        function bindButton(el, handler) {
-            if (!el || typeof handler !== 'function') return;
-            if (typeof el.addEventListener !== 'function') return;
-            var lastTap = 0;
-            function run(e) {
-                if (e && e.type === 'touchend') e.preventDefault();
-                var now = Date.now();
-                if (now - lastTap < 350) return;
-                lastTap = now;
-                handler(e);
-            }
-            el.addEventListener('click', run);
-            try { el.addEventListener('touchend', run, { passive: false }); } catch (err) { }
-        }
-        
-        // Настройка обработчиков. Все кнопки управляются только через onclick -> CryptonRun() в HTML,
-        // чтобы не вызывать одно и то же действие дважды (раньше срабатывали и onclick, и addEventListener).
+
         function setupEventListeners() {
             try {
-                if (typeof document.addEventListener !== 'function') return;
                 if (messageToDecrypt && messageToDecrypt.addEventListener) {
                     messageToDecrypt.addEventListener('input', function() {
                         var value = (this.value || '').trim();
@@ -620,101 +531,47 @@
                 if (messageToDecrypt && messageToDecrypt.addEventListener) messageToDecrypt.addEventListener('input', debounce(saveTextState, 500));
             } catch (err) { }
         }
-        
-        function showFileInput() {
-            if (pasteKeysContainer) pasteKeysContainer.style.display = 'none';
-            if (fileInputContainer) fileInputContainer.style.display = 'block';
-            if (keyFileInput) keyFileInput.value = '';
-            showMessage('Выберите файл с ключами в формате JSON', 'warning');
-        }
-        function showPasteKeysInput() {
-            if (fileInputContainer) fileInputContainer.style.display = 'none';
-            if (pasteKeysContainer) pasteKeysContainer.style.display = 'block';
-            if (pastePrivateKeyInput) pastePrivateKeyInput.value = '';
-            if (pastePublicKeyInput) pastePublicKeyInput.value = '';
+
+        function showMessage(text, type) {
+            if (type === undefined) type = 'success';
+            if (!messageArea) return;
+            var messageDiv = document.createElement('div');
+            messageDiv.className = 'message ' + type;
+            messageDiv.textContent = text;
+            messageArea.appendChild(messageDiv);
             setTimeout(function() {
-                if (pastePrivateKeyInput) { pastePrivateKeyInput.focus(); if (pastePrivateKeyInput.scrollIntoView) pastePrivateKeyInput.scrollIntoView({ behavior: 'auto', block: 'center' }); }
-            }, 150);
-        }
-        function hidePasteKeysInput() {
-            if (pasteKeysContainer) pasteKeysContainer.style.display = 'none';
-            if (pastePrivateKeyInput) pastePrivateKeyInput.value = '';
-            if (pastePublicKeyInput) pastePublicKeyInput.value = '';
-        }
-        
-        function applyPastedKeys() {
-            if (applyPastedKeysBtn && applyPastedKeysBtn.disabled) return;
-            var privateKeyBase64 = pastePrivateKeyInput ? pastePrivateKeyInput.value.trim() : '';
-            var publicKeyBase64 = pastePublicKeyInput ? pastePublicKeyInput.value.trim() : '';
-            if (!privateKeyBase64 || !publicKeyBase64) {
-                showMessage('❌ Введите оба ключа (приватный и публичный)', 'error');
-                return;
-            }
-            if (applyPastedKeysBtn) applyPastedKeysBtn.disabled = true;
-            importKeysFromData(privateKeyBase64, publicKeyBase64).then(function() {
-                hidePasteKeysInput();
-                showMessage('✅ Ключи успешно применены и сохранены');
-            }).catch(function(error) {
-                showMessage('❌ Ошибка при применении ключей: ' + (error && error.message ? error.message : error), 'error');
-            }).then(function() {
-                if (applyPastedKeysBtn) applyPastedKeysBtn.disabled = false;
-            });
-        }
-        function handleFileSelect(event) {
-            var target = event && event.target ? event.target : (keyFileInput || null);
-            var file = target && target.files && target.files[0] ? target.files[0] : null;
-            if (!file) return;
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    var fileContent = e.target.result;
-                    var keysData = JSON.parse(fileContent);
-                    if (!keysData.privateKey || !keysData.publicKey) {
-                        throw new Error('Неверный формат файла. Файл должен содержать приватный и публичный ключи.');
-                    }
-                    importKeysFromData(keysData.privateKey, keysData.publicKey).then(function() {
-                        if (fileInputContainer) fileInputContainer.style.display = 'none';
-                        if (pasteKeysContainer) pasteKeysContainer.style.display = 'none';
-                        showMessage('✅ Ключи успешно загружены из файла');
-                    }).catch(function(error) {
-                        showMessage('❌ Ошибка при загрузке ключей из файла: ' + (error && error.message ? error.message : error), 'error');
-                        if (keyFileInput) keyFileInput.value = '';
-                    });
-                } catch (err) {
-                    showMessage('❌ Ошибка при загрузке ключей из файла: ' + (err && err.message ? err.message : err), 'error');
-                    if (keyFileInput) keyFileInput.value = '';
+                if (messageDiv.parentNode) {
+                    messageDiv.style.opacity = '0';
+                    messageDiv.style.transition = 'opacity 0.3s';
+                    setTimeout(function() { if (messageDiv.parentNode) messageDiv.parentNode.removeChild(messageDiv); }, 300);
                 }
-            };
-            reader.onerror = function() {
-                showMessage('❌ Ошибка при чтении файла', 'error');
-                if (keyFileInput) keyFileInput.value = '';
-            };
-            reader.readAsText(file);
+            }, 5000);
         }
-        function importKeysFromData(privateKeyBase64, publicKeyBase64) {
-            var cleanPrivate = (privateKeyBase64 || '').replace(/\s/g, '');
-            var cleanPublic = (publicKeyBase64 || '').replace(/\s/g, '');
-            if (!cleanPrivate || !cleanPublic) return Promise.reject(new Error('Ключи не могут быть пустыми.'));
-            var privateKeyData = base64ToArrayBuffer(cleanPrivate);
-            var publicKeyData = base64ToArrayBuffer(cleanPublic);
-            return Promise.all([
-                window.crypto.subtle.importKey("pkcs8", privateKeyData, { name: "RSA-OAEP", hash: "SHA-256" }, true, ["decrypt"]),
-                window.crypto.subtle.importKey("spki", publicKeyData, { name: "RSA-OAEP", hash: "SHA-256" }, true, ["encrypt"])
-            ]).then(function(keys) {
-                cryptoKeys = { privateKey: keys[0], publicKey: keys[1] };
-                return saveKeys();
-            }).then(function() { return updateKeyDisplay(); }).then(function() { updateUI(); });
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).catch(function() { fallbackCopy(text); });
+            else fallbackCopy(text);
         }
-        
-        function debounce(func, wait) {
-            var timeout;
-            return function() {
-                var later = function() { clearTimeout(timeout); func(); };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
+        function fallbackCopy(text) {
+            var textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.setAttribute('readonly', '');
+            textArea.style.cssText = 'position:fixed;left:0;top:0;width:1px;height:1px;padding:0;border:0;outline:0;opacity:0.01;z-index:9999;';
+            document.body.appendChild(textArea);
+            textArea.focus(); textArea.select();
+            try { document.execCommand('copy'); } catch (e) { }
+            if (textArea.parentNode) textArea.parentNode.removeChild(textArea);
         }
-        
+
+        function copyFrom(targetId) {
+            var el = document.getElementById(targetId);
+            if (!el) return;
+            var text = (el.textContent || '').trim();
+            if (!text || text.indexOf('Здесь будет') === 0 || text === 'Ключ не загружен') { showMessage('Нет данных для копирования', 'warning'); return; }
+            copyToClipboard(text);
+            showMessage('Текст скопирован в буфер обмена', 'success');
+        }
+
         function saveTextState() {
             try {
                 if (!messageToEncrypt || !messageToDecrypt) return;
@@ -735,6 +592,7 @@
                 }
             } catch (e) { }
         }
+
         var PLACEHOLDER_TEXTS = ['Здесь будет отображен результат шифрования', 'Здесь будет отображен результат дешифрования', 'Ключ не загружен'];
         function updateCopyButtonsState() {
             var list = document.querySelectorAll ? document.querySelectorAll('.copy-btn') : [];
@@ -749,8 +607,7 @@
                 if (hasData) wrapper.classList.add('has-data'); else wrapper.classList.remove('has-data');
             }
         }
-        
-        // Обновление UI в зависимости от состояния
+
         function updateUI() {
             var hasKeys = cryptoKeys !== null;
             if (keyStatusIndicator) keyStatusIndicator.className = 'status-indicator ' + (hasKeys ? 'status-ready' : 'status-not-ready');
@@ -758,56 +615,76 @@
                 keyStatusText.textContent = hasKeys ? 'Ключи загружены и готовы к использованию' : 'Ключи не загружены';
                 keyStatusText.style.color = hasKeys ? '#27ae60' : '#e74c3c';
             }
-            if (encryptBtn) { encryptBtn.disabled = !hasKeys; encryptBtn.title = hasKeys ? '' : 'Сначала загрузите или сгенерируйте ключи'; }
-            if (decryptBtn) { decryptBtn.disabled = !hasKeys; decryptBtn.title = hasKeys ? '' : 'Сначала загрузите или сгенерируйте ключи'; }
+            if (encryptBtn) { encryptBtn.disabled = !hasKeys; }
+            if (decryptBtn) { decryptBtn.disabled = !hasKeys; }
             if (exportKeysBtn) exportKeysBtn.disabled = !hasKeys;
+            if (encryptPhotoBtn) encryptPhotoBtn.disabled = !hasKeys;
+            if (decryptPhotoBtn) decryptPhotoBtn.disabled = !hasKeys;
+            if (encryptVideoBtn) encryptVideoBtn.disabled = !hasKeys;
+            if (decryptVideoBtn) decryptVideoBtn.disabled = !hasKeys;
             updateCopyButtonsState();
         }
-        
-        // Показать сообщение
-        function showMessage(text, type) {
-            if (type === undefined) type = 'success';
-            if (!messageArea) return;
-            var messageDiv = document.createElement('div');
-            messageDiv.className = 'message ' + type;
-            messageDiv.textContent = text;
-            messageArea.appendChild(messageDiv);
-            setTimeout(function() {
-                if (messageDiv.parentNode) {
-                    messageDiv.style.opacity = '0';
-                    messageDiv.style.transition = 'opacity 0.3s';
-                    setTimeout(function() {
-                        if (messageDiv.parentNode) messageDiv.parentNode.removeChild(messageDiv);
-                    }, 300);
+
+        function showFileInput() {
+            var fileInputContainer = document.getElementById('fileInputContainer');
+            var pasteKeysContainer = document.getElementById('pasteKeysContainer');
+            var keyFileInput = document.getElementById('keyFileInput');
+            if (pasteKeysContainer) pasteKeysContainer.style.display = 'none';
+            if (fileInputContainer) fileInputContainer.style.display = 'block';
+            if (keyFileInput) keyFileInput.value = '';
+            showMessage('Выберите файл с ключами в формате JSON', 'warning');
+        }
+        function showPasteKeysInput() {
+            var fileInputContainer = document.getElementById('fileInputContainer');
+            var pasteKeysContainer = document.getElementById('pasteKeysContainer');
+            if (fileInputContainer) fileInputContainer.style.display = 'none';
+            if (pasteKeysContainer) pasteKeysContainer.style.display = 'block';
+            document.getElementById('pastePrivateKey').value = '';
+            document.getElementById('pastePublicKey').value = '';
+        }
+        function hidePasteKeysInput() {
+            var pasteKeysContainer = document.getElementById('pasteKeysContainer');
+            if (pasteKeysContainer) pasteKeysContainer.style.display = 'none';
+        }
+
+        function applyPastedKeys() {
+            var applyPastedKeysBtn = document.getElementById('applyPastedKeys');
+            if (applyPastedKeysBtn && applyPastedKeysBtn.disabled) return;
+            var privateKeyBase64 = (document.getElementById('pastePrivateKey').value || '').trim();
+            var publicKeyBase64 = (document.getElementById('pastePublicKey').value || '').trim();
+            if (!privateKeyBase64 || !publicKeyBase64) { showMessage('❌ Введите оба ключа (приватный и публичный)', 'error'); return; }
+            if (applyPastedKeysBtn) applyPastedKeysBtn.disabled = true;
+            importKeysFromData(privateKeyBase64, publicKeyBase64).then(function() {
+                hidePasteKeysInput();
+                showMessage('✅ Ключи успешно применены и сохранены');
+            }).catch(function(error) {
+                showMessage('❌ Ошибка при применении ключей: ' + (error && error.message ? error.message : error), 'error');
+            }).then(function() {
+                if (applyPastedKeysBtn) applyPastedKeysBtn.disabled = false;
+            });
+        }
+
+        function handleFileSelect(event) {
+            var keyFileInput = document.getElementById('keyFileInput');
+            var file = event && event.target && event.target.files && event.target.files[0] ? event.target.files[0] : (keyFileInput && keyFileInput.files ? keyFileInput.files[0] : null);
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    var keysData = JSON.parse(e.target.result);
+                    if (!keysData.privateKey || !keysData.publicKey) throw new Error('Неверный формат файла');
+                    importKeysFromData(keysData.privateKey, keysData.publicKey).then(function() {
+                        var fileInputContainer = document.getElementById('fileInputContainer');
+                        if (fileInputContainer) fileInputContainer.style.display = 'none';
+                        showMessage('✅ Ключи успешно загружены из файла');
+                    });
+                } catch (err) {
+                    showMessage('❌ Ошибка при загрузке ключей: ' + (err && err.message ? err.message : err), 'error');
                 }
-            }, 5000);
+            };
+            reader.readAsText(file);
         }
-        
-        // Копирование в буфер обмена (работает на мобильных)
-        function copyToClipboard(text) {
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).catch(function() { fallbackCopy(text); });
-            } else {
-                fallbackCopy(text);
-            }
-        }
-        function fallbackCopy(text) {
-            var textArea = document.createElement('textarea');
-            textArea.value = text;
-            textArea.setAttribute('readonly', '');
-            textArea.style.cssText = 'position:fixed;left:0;top:0;width:1px;height:1px;padding:0;border:0;outline:0;opacity:0.01;z-index:9999;';
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            textArea.setSelectionRange(0, (text || '').length);
-            try {
-                document.execCommand('copy');
-            } catch (e) {
-                console.warn('Копирование не удалось:', e);
-            }
-            if (textArea.parentNode) textArea.parentNode.removeChild(textArea);
-        }
-        
+
         function generateKeys() {
             if (generateKeysBtn && generateKeysBtn.disabled) return;
             if (generateLoader) generateLoader.style.display = 'inline-block';
@@ -829,36 +706,45 @@
                 if (generateKeysBtn) generateKeysBtn.disabled = false;
             });
         }
+
+        function importKeysFromData(privateKeyBase64, publicKeyBase64) {
+            var cleanPrivate = (privateKeyBase64 || '').replace(/\s/g, '');
+            var cleanPublic = (publicKeyBase64 || '').replace(/\s/g, '');
+            if (!cleanPrivate || !cleanPublic) return Promise.reject(new Error('Ключи не могут быть пустыми.'));
+            var privateKeyData = base64ToArrayBuffer(cleanPrivate);
+            var publicKeyData = base64ToArrayBuffer(cleanPublic);
+            return Promise.all([
+                window.crypto.subtle.importKey("pkcs8", privateKeyData, { name: "RSA-OAEP", hash: "SHA-256" }, true, ["decrypt"]),
+                window.crypto.subtle.importKey("spki", publicKeyData, { name: "RSA-OAEP", hash: "SHA-256" }, true, ["encrypt"])
+            ]).then(function(keysArr) {
+                cryptoKeys = { privateKey: keysArr[0], publicKey: keysArr[1] };
+                return saveKeys();
+            }).then(function() { return updateKeyDisplay(); }).then(function() { updateUI(); });
+        }
+
         function saveKeys() {
             if (!cryptoKeys) return Promise.resolve();
             return Promise.all([
                 window.crypto.subtle.exportKey("pkcs8", cryptoKeys.privateKey),
                 window.crypto.subtle.exportKey("spki", cryptoKeys.publicKey)
             ]).then(function(arr) {
-                var privateKeyBase64 = arrayBufferToBase64(arr[0]);
-                var publicKeyBase64 = arrayBufferToBase64(arr[1]);
-                try { localStorage.setItem('rsaPrivateKey', privateKeyBase64); localStorage.setItem('rsaPublicKey', publicKeyBase64); } catch (e) { }
-            }).catch(function(error) {
-                showMessage('❌ Ошибка при сохранении ключей: ' + (error && error.message ? error.message : error), 'error');
+                try {
+                    localStorage.setItem('rsaPrivateKey', arrayBufferToBase64(arr[0]));
+                    localStorage.setItem('rsaPublicKey', arrayBufferToBase64(arr[1]));
+                } catch (e) { }
             });
         }
+
         function loadFromStorage(silent) {
             if (silent === undefined) silent = false;
-            try {
-                var privateKeyBase64 = localStorage.getItem('rsaPrivateKey');
-                var publicKeyBase64 = localStorage.getItem('rsaPublicKey');
-                if (!privateKeyBase64 || !publicKeyBase64) {
-                    if (!silent) showMessage('ℹ️ Ключи не найдены в хранилище. Сначала сгенерируйте их.', 'warning');
-                    return Promise.resolve();
-                }
-                return importKeysFromData(privateKeyBase64, publicKeyBase64).then(function() {
-                    if (!silent) showMessage('✅ Ключи успешно загружены из хранилища');
-                });
-            } catch (error) {
-                showMessage('❌ Ошибка при загрузке ключей: ' + (error && error.message ? error.message : error), 'error');
-                return Promise.resolve();
-            }
+            var privateKeyBase64 = null, publicKeyBase64 = null;
+            try { privateKeyBase64 = localStorage.getItem('rsaPrivateKey'); publicKeyBase64 = localStorage.getItem('rsaPublicKey'); } catch (e) { }
+            if (!privateKeyBase64 || !publicKeyBase64) return Promise.resolve();
+            return importKeysFromData(privateKeyBase64, publicKeyBase64).then(function() {
+                if (!silent) showMessage('✅ Ключи успешно загружены из хранилища');
+            });
         }
+
         function updateKeyDisplay() {
             if (!cryptoKeys || !privateKeyDisplay || !publicKeyDisplay) return Promise.resolve();
             return Promise.all([
@@ -867,132 +753,14 @@
             ]).then(function(arr) {
                 privateKeyDisplay.textContent = formatKey(arrayBufferToBase64(arr[0]));
                 publicKeyDisplay.textContent = formatKey(arrayBufferToBase64(arr[1]));
-            }).catch(function() { });
+            });
         }
         function formatKey(keyBase64) {
             if (!keyBase64) return '';
             var matched = keyBase64.match(/.{1,64}/g);
             return matched ? matched.join('\n') : '';
         }
-        
-        function encryptMessage() {
-            if (encryptBtn && encryptBtn.disabled) return;
-            if (!cryptoKeys) { showMessage('❌ Сначала загрузите или сгенерируйте ключи', 'error'); return; }
-            var message = messageToEncrypt ? messageToEncrypt.value.trim() : '';
-            if (!message) { showMessage('❌ Введите сообщение для шифрования', 'error'); if (messageToEncrypt) messageToEncrypt.focus(); return; }
-            var MAX_SIZE = 10 * 1024 * 1024;
-            var encoder = new TextEncoder();
-            var data = encoder.encode(message);
-            var messageBytes = data.length;
-            if (messageBytes > MAX_SIZE) {
-                showMessage('❌ Сообщение слишком длинное (' + (messageBytes / 1024 / 1024).toFixed(1) + ' МБ). Максимум: 10 МБ.', 'error');
-                if (messageToEncrypt) messageToEncrypt.focus();
-                return;
-            }
-            if (encryptLoader) encryptLoader.style.display = 'inline-block';
-            if (encryptBtn) encryptBtn.disabled = true;
-            var doEncrypt = messageBytes <= 190
-                ? window.crypto.subtle.encrypt({ name: "RSA-OAEP" }, cryptoKeys.publicKey, data).then(function(encrypted) { return arrayBufferToHexString(encrypted); })
-                : hybridEncrypt(data);
-            doEncrypt.then(function(hexString) {
-                if (encryptedResult) encryptedResult.textContent = hexString;
-                updateCopyButtonsState();
-                if (window.autoCopyEnabled !== false && hexString.length <= 500 * 1024 && messageToDecrypt) { messageToDecrypt.value = hexString; saveTextState(); }
-                else if (window.autoCopyEnabled !== false && hexString.length > 500 * 1024) showMessage('Результат слишком большой для авто-копирования. Используйте кнопку Копировать.', 'warning');
-                showMessage('✅ Сообщение успешно зашифровано');
-            }).catch(function(error) {
-                showMessage('❌ Ошибка при шифровании: ' + (error && error.message ? error.message : error), 'error');
-            }).then(function() {
-                if (encryptLoader) encryptLoader.style.display = 'none';
-                if (encryptBtn) encryptBtn.disabled = !cryptoKeys;
-            });
-        }
-        function decryptMessage() {
-            if (decryptBtn && decryptBtn.disabled) return;
-            if (!cryptoKeys) { showMessage('❌ Сначала загрузите или сгенерируйте ключи', 'error'); return; }
-            var encryptedHex = messageToDecrypt ? messageToDecrypt.value.trim() : '';
-            if (!encryptedHex) { showMessage('❌ Введите зашифрованное сообщение', 'error'); if (messageToDecrypt) messageToDecrypt.focus(); return; }
-            var isHybrid = encryptedHex.indexOf('h1') === 0 && encryptedHex.length > 2;
-            var dataHex = isHybrid ? encryptedHex.slice(2) : encryptedHex;
-            if (!/^[0-9a-fA-F]+$/.test(dataHex)) { showMessage('❌ Неверный формат. Используйте только hex-символы (0-9, a-f, A-F)', 'error'); if (messageToDecrypt) messageToDecrypt.focus(); return; }
-            if (dataHex.length % 2 !== 0) { showMessage('❌ Неверный формат. Длина hex-строки должна быть чётной', 'error'); if (messageToDecrypt) messageToDecrypt.focus(); return; }
-            if (decryptLoader) decryptLoader.style.display = 'inline-block';
-            if (decryptBtn) decryptBtn.disabled = true;
-            var doDecrypt = isHybrid ? hybridDecrypt(dataHex) : window.crypto.subtle.decrypt({ name: "RSA-OAEP" }, cryptoKeys.privateKey, hexStringToArrayBuffer(dataHex));
-            doDecrypt.then(function(decrypted) {
-                var decoder = new TextDecoder();
-                var decryptedMessage = decoder.decode(decrypted);
-                if (decryptedResult) decryptedResult.textContent = decryptedMessage;
-                updateCopyButtonsState();
-                showMessage('✅ Сообщение успешно расшифровано');
-            }).catch(function(error) {
-                showMessage('❌ Ошибка при дешифровании: ' + (error && error.message ? error.message : error), 'error');
-            }).then(function() {
-                if (decryptLoader) decryptLoader.style.display = 'none';
-                if (decryptBtn) decryptBtn.disabled = !cryptoKeys;
-            });
-        }
-        
-        // Экспорт ключей (один файл: на Android/средство просмотра — только видимая ссылка, без programmatic click)
-        var exportInProgress = false;
-        var exportLockUntil = 0;
-        function exportKeys() {
-            if (!cryptoKeys) {
-                showMessage('❌ Нет ключей для экспорта', 'error');
-                return;
-            }
-            var now = Date.now();
-            if (exportInProgress || now < exportLockUntil) return;
-            exportInProgress = true;
-            exportLockUntil = now + 2000;
-            var privateKeyDataP = window.crypto.subtle.exportKey("pkcs8", cryptoKeys.privateKey);
-            var publicKeyDataP = window.crypto.subtle.exportKey("spki", cryptoKeys.publicKey);
-            Promise.all([privateKeyDataP, publicKeyDataP]).then(function(arr) {
-                var privateKeyBase64 = arrayBufferToBase64(arr[0]);
-                var publicKeyBase64 = arrayBufferToBase64(arr[1]);
-                var exportData = {
-                    privateKey: privateKeyBase64,
-                    publicKey: publicKeyBase64,
-                    timestamp: new Date().toISOString(),
-                    format: 'RSA-OAEP 2048'
-                };
-                var blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
-                var url = URL.createObjectURL(blob);
-                var fileName = 'rsa-keys-' + new Date().toISOString().split('T')[0] + '.json';
-                var isTouchOrMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || /Android|webOS|iPhone|iPad/i.test(navigator.userAgent);
-                if (isTouchOrMobile) {
-                    var fallbackLink = document.createElement('a');
-                    fallbackLink.href = url;
-                    fallbackLink.download = fileName;
-                    fallbackLink.textContent = '📥 Скачать ключи (нажмите один раз)';
-                    fallbackLink.className = 'message success';
-                    fallbackLink.style.display = 'block';
-                    fallbackLink.style.marginTop = '8px';
-                    fallbackLink.style.padding = '14px';
-                    messageArea.appendChild(fallbackLink);
-                    setTimeout(function() {
-                        if (fallbackLink.parentNode) fallbackLink.parentNode.removeChild(fallbackLink);
-                        URL.revokeObjectURL(url);
-                    }, 20000);
-                    showMessage('✅ Нажмите ссылку выше, чтобы сохранить файл');
-                } else {
-                    var a = document.createElement('a');
-                    a.href = url;
-                    a.download = fileName;
-                    a.style.display = 'none';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    setTimeout(function() { URL.revokeObjectURL(url); }, 200);
-                    showMessage('✅ Ключи экспортированы в файл');
-                }
-            }).catch(function(error) {
-                showMessage('❌ Ошибка при экспорте ключей: ' + (error.message || error), 'error');
-            }).then(function() {
-                exportInProgress = false;
-            });
-        }
-        
+
         function clearKeys() {
             if (!confirm('Вы уверены, что хотите очистить все ключи? Это действие нельзя отменить.')) return;
             cryptoKeys = null;
@@ -1003,13 +771,70 @@
             if (messageToDecrypt) messageToDecrypt.value = '';
             if (encryptedResult) encryptedResult.textContent = 'Здесь будет отображен результат шифрования';
             if (decryptedResult) decryptedResult.textContent = 'Здесь будет отображен результат дешифрования';
-            if (fileInputContainer) fileInputContainer.style.display = 'none';
-            hidePasteKeysInput();
             updateUI();
-            updateCopyButtonsState();
             showMessage('Все ключи и данные очищены');
         }
-        
+
+        function exportKeys() {
+            if (!cryptoKeys) { showMessage('❌ Нет ключей для экспорта', 'error'); return; }
+            Promise.all([
+                window.crypto.subtle.exportKey("pkcs8", cryptoKeys.privateKey),
+                window.crypto.subtle.exportKey("spki", cryptoKeys.publicKey)
+            ]).then(function(arr) {
+                var exportData = { privateKey: arrayBufferToBase64(arr[0]), publicKey: arrayBufferToBase64(arr[1]), timestamp: new Date().toISOString(), format: 'RSA-OAEP 2048' };
+                downloadBlob(new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' }), 'rsa-keys-' + new Date().toISOString().split('T')[0] + '.json');
+                showMessage('✅ Ключи экспортированы в файл');
+            }).catch(function(error) { showMessage('❌ Ошибка экспорта: ' + (error && error.message ? error.message : error), 'error'); });
+        }
+
+        function encryptMessage() {
+            if (encryptBtn && encryptBtn.disabled) return;
+            if (!cryptoKeys) { showMessage('❌ Сначала загрузите или сгенерируйте ключи', 'error'); return; }
+            var message = messageToEncrypt ? messageToEncrypt.value.trim() : '';
+            if (!message) { showMessage('❌ Введите сообщение для шифрования', 'error'); return; }
+            var encoder = new TextEncoder();
+            var data = encoder.encode(message);
+            if (encryptLoader) encryptLoader.style.display = 'inline-block';
+            if (encryptBtn) encryptBtn.disabled = true;
+            var doEncrypt = data.length <= 190
+                ? window.crypto.subtle.encrypt({ name: "RSA-OAEP" }, cryptoKeys.publicKey, data).then(function(encrypted) { return arrayBufferToHexString(encrypted); })
+                : hybridEncrypt(data);
+            doEncrypt.then(function(hexString) {
+                if (encryptedResult) encryptedResult.textContent = hexString;
+                updateCopyButtonsState();
+                if (window.autoCopyEnabled !== false && messageToDecrypt) { messageToDecrypt.value = hexString; saveTextState(); }
+                showMessage('✅ Сообщение успешно зашифровано');
+            }).catch(function(error) {
+                showMessage('❌ Ошибка при шифровании: ' + (error && error.message ? error.message : error), 'error');
+            }).then(function() {
+                if (encryptLoader) encryptLoader.style.display = 'none';
+                if (encryptBtn) encryptBtn.disabled = !cryptoKeys;
+            });
+        }
+
+        function decryptMessage() {
+            if (decryptBtn && decryptBtn.disabled) return;
+            if (!cryptoKeys) { showMessage('❌ Сначала загрузите или сгенерируйте ключи', 'error'); return; }
+            var encryptedHex = messageToDecrypt ? messageToDecrypt.value.trim() : '';
+            if (!encryptedHex) { showMessage('❌ Введите зашифрованное сообщение', 'error'); return; }
+            var isHybrid = encryptedHex.indexOf('h1') === 0 && encryptedHex.length > 2;
+            var dataHex = isHybrid ? encryptedHex.slice(2) : encryptedHex;
+            if (decryptLoader) decryptLoader.style.display = 'inline-block';
+            if (decryptBtn) decryptBtn.disabled = true;
+            var doDecrypt = isHybrid ? hybridDecrypt(dataHex) : window.crypto.subtle.decrypt({ name: "RSA-OAEP" }, cryptoKeys.privateKey, hexStringToArrayBuffer(dataHex));
+            doDecrypt.then(function(decrypted) {
+                var decoder = new TextDecoder();
+                if (decryptedResult) decryptedResult.textContent = decoder.decode(decrypted);
+                updateCopyButtonsState();
+                showMessage('✅ Сообщение успешно расшифровано');
+            }).catch(function(error) {
+                showMessage('❌ Ошибка при дешифровании: ' + (error && error.message ? error.message : error), 'error');
+            }).then(function() {
+                if (decryptLoader) decryptLoader.style.display = 'none';
+                if (decryptBtn) decryptBtn.disabled = !cryptoKeys;
+            });
+        }
+
         function arrayBufferToBase64(buffer) {
             var bytes = new Uint8Array(buffer);
             var binary = '';
@@ -1017,14 +842,10 @@
             return btoa(binary);
         }
         function base64ToArrayBuffer(base64) {
-            try {
-                var binary = atob(base64);
-                var bytes = new Uint8Array(binary.length);
-                for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-                return bytes.buffer;
-            } catch (e) {
-                throw new Error('Неверный формат Base64. Проверьте, что ключ скопирован полностью.');
-            }
+            var binary = atob(base64);
+            var bytes = new Uint8Array(binary.length);
+            for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+            return bytes.buffer;
         }
         function arrayBufferToHexString(buffer) {
             var bytes = new Uint8Array(buffer);
@@ -1041,6 +862,8 @@
             for (var i = 0; i < hexString.length; i += 2) bytes[i / 2] = parseInt(hexString.slice(i, i + 2), 16);
             return bytes.buffer;
         }
+
+        // "Тот же алгоритм", что и для длинного текста
         function hybridEncrypt(data) {
             return window.crypto.subtle.generateKey({ name: "AES-GCM", length: 256 }, true, ["encrypt"]).then(function(aesKey) {
                 var iv = crypto.getRandomValues(new Uint8Array(12));
@@ -1060,23 +883,251 @@
             var rsaEncryptedHex = hexData.slice(0, rsaEncryptedLen);
             var ivHex = hexData.slice(rsaEncryptedLen, rsaEncryptedLen + ivLen);
             var cipherAndTagHex = hexData.slice(rsaEncryptedLen + ivLen);
-            var aesKeyEncrypted = hexStringToArrayBuffer(rsaEncryptedHex);
-            return window.crypto.subtle.decrypt({ name: "RSA-OAEP" }, cryptoKeys.privateKey, aesKeyEncrypted).then(function(aesKeyRaw) {
+            return window.crypto.subtle.decrypt({ name: "RSA-OAEP" }, cryptoKeys.privateKey, hexStringToArrayBuffer(rsaEncryptedHex)).then(function(aesKeyRaw) {
                 return window.crypto.subtle.importKey("raw", aesKeyRaw, { name: "AES-GCM" }, false, ["decrypt"]);
             }).then(function(aesKey) {
-                var iv = hexStringToArrayBuffer(ivHex);
-                var cipherAndTag = hexStringToArrayBuffer(cipherAndTagHex);
-                return window.crypto.subtle.decrypt({ name: "AES-GCM", iv: iv, tagLength: 128 }, aesKey, cipherAndTag);
+                return window.crypto.subtle.decrypt({ name: "AES-GCM", iv: new Uint8Array(hexStringToArrayBuffer(ivHex)), tagLength: 128 }, aesKey, hexStringToArrayBuffer(cipherAndTagHex));
             });
         }
-        
-        try {
-            if (document.body) init();
-            else if (document.addEventListener) document.addEventListener('DOMContentLoaded', init);
-            else window.onload = init;
-        } catch (e) {
-            try { document.body.insertAdjacentHTML('afterbegin', '<div class="message error" style="margin:20px;">Не удалось запустить. Откройте файл в браузере (Chrome, Edge): двойной клик по файлу.</div>'); } catch (err) { }
+
+        // Фото: тот же гибридный формат, но упакован в JSON файл
+        function setPreview(container, blobOrFile, kind) {
+            try {
+                if (kind === 'orig' && lastPhotoOriginalUrl) { URL.revokeObjectURL(lastPhotoOriginalUrl); lastPhotoOriginalUrl = null; }
+                if (kind === 'dec' && lastPhotoDecryptedUrl) { URL.revokeObjectURL(lastPhotoDecryptedUrl); lastPhotoDecryptedUrl = null; }
+            } catch (e) { }
+            if (!container) return;
+            container.innerHTML = '';
+            if (!blobOrFile) { container.innerHTML = '<span style="color:#7f8c8d;">Нет изображения</span>'; return; }
+            var img = document.createElement('img');
+            var url = URL.createObjectURL(blobOrFile);
+            if (kind === 'orig') lastPhotoOriginalUrl = url;
+            else lastPhotoDecryptedUrl = url;
+            img.src = url;
+            container.appendChild(img);
         }
+
+        function updatePhotoInfo() {
+            var f1 = photoEncryptInput && photoEncryptInput.files && photoEncryptInput.files[0] ? photoEncryptInput.files[0] : null;
+            if (photoEncryptInfo) photoEncryptInfo.textContent = f1 ? (f1.name + ' — ' + (f1.type || 'image/*') + ' — ' + (f1.size / 1024 / 1024).toFixed(2) + ' МБ') : 'Файл не выбран';
+            var f2 = photoDecryptInput && photoDecryptInput.files && photoDecryptInput.files[0] ? photoDecryptInput.files[0] : null;
+            if (photoDecryptInfo) photoDecryptInfo.textContent = f2 ? (f2.name + ' — ' + (f2.size / 1024 / 1024).toFixed(2) + ' МБ') : 'Файл не выбран';
+        }
+
+        function setPhotoBusy(which, busy) {
+            if (which === 'enc') {
+                if (encryptPhotoLoader) encryptPhotoLoader.style.display = busy ? 'inline-block' : 'none';
+                if (encryptPhotoBtn) encryptPhotoBtn.disabled = !!busy || !cryptoKeys;
+            } else {
+                if (decryptPhotoLoader) decryptPhotoLoader.style.display = busy ? 'inline-block' : 'none';
+                if (decryptPhotoBtn) decryptPhotoBtn.disabled = !!busy || !cryptoKeys;
+            }
+        }
+
+        function setVideoBusy(which, busy) {
+            if (which === 'enc') {
+                if (encryptVideoLoader) encryptVideoLoader.style.display = busy ? 'inline-block' : 'none';
+                if (encryptVideoBtn) encryptVideoBtn.disabled = !!busy || !cryptoKeys;
+            } else {
+                if (decryptVideoLoader) decryptVideoLoader.style.display = busy ? 'inline-block' : 'none';
+                if (decryptVideoBtn) decryptVideoBtn.disabled = !!busy || !cryptoKeys;
+            }
+        }
+
+        function setVideoPreview(container, blobOrFile, kind) {
+            try {
+                if (kind === 'orig' && lastVideoOriginalUrl) { URL.revokeObjectURL(lastVideoOriginalUrl); lastVideoOriginalUrl = null; }
+                if (kind === 'dec' && lastVideoDecryptedUrl) { URL.revokeObjectURL(lastVideoDecryptedUrl); lastVideoDecryptedUrl = null; }
+            } catch (e) { }
+            if (!container) return;
+            container.innerHTML = '';
+            if (!blobOrFile) { container.innerHTML = '<span style="color:#7f8c8d;">Нет видео</span>'; return; }
+            var video = document.createElement('video');
+            video.controls = true;
+            video.style.maxWidth = '100%';
+            video.style.maxHeight = '260px';
+            var url = URL.createObjectURL(blobOrFile);
+            if (kind === 'orig') lastVideoOriginalUrl = url;
+            else lastVideoDecryptedUrl = url;
+            video.src = url;
+            container.appendChild(video);
+        }
+
+        function downloadBlob(blob, fileName) {
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(function() { try { URL.revokeObjectURL(url); } catch (e) { } }, 500);
+        }
+
+        function encryptPhoto() {
+            if (!cryptoKeys) return showMessage('❌ Сначала загрузите/сгенерируйте ключи', 'error');
+            var file = photoEncryptInput && photoEncryptInput.files && photoEncryptInput.files[0] ? photoEncryptInput.files[0] : null;
+            if (!file) return showMessage('❌ Выберите фото', 'error');
+            setPhotoBusy('enc', true);
+            updatePhotoInfo();
+            setPreview(photoOriginalPreview, file, 'orig');
+
+            file.arrayBuffer().then(function(buf) {
+                return hybridEncrypt(buf).then(function(payload) {
+                    var pack = {
+                        v: 1,
+                        alg: 'h1',
+                        name: file.name || ('photo-' + Date.now()),
+                        mime: file.type || 'application/octet-stream',
+                        payload: payload
+                    };
+                    var outName = (pack.name || 'photo') + '.krypton';
+                    downloadBlob(new Blob([JSON.stringify(pack)], { type: 'application/json' }), outName);
+                    showMessage('✅ Фото зашифровано: ' + outName);
+                });
+            }).catch(function(e) {
+                showMessage('❌ Ошибка шифрования фото: ' + (e && e.message ? e.message : e), 'error');
+            }).then(function() { setPhotoBusy('enc', false); updateUI(); });
+        }
+
+        function decryptPhoto() {
+            if (!cryptoKeys) return showMessage('❌ Сначала загрузите/сгенерируйте ключи', 'error');
+            var file = photoDecryptInput && photoDecryptInput.files && photoDecryptInput.files[0] ? photoDecryptInput.files[0] : null;
+            if (!file) return showMessage('❌ Выберите файл `.krypton`', 'error');
+            setPhotoBusy('dec', true);
+            updatePhotoInfo();
+
+            file.text().then(function(text) {
+                var pack = JSON.parse(text);
+                if (!pack || typeof pack.payload !== 'string' || pack.payload.indexOf('h1') !== 0) throw new Error('Неверный формат .krypton');
+                return hybridDecrypt(pack.payload.slice(2)).then(function(plainBuf) {
+                    var blob = new Blob([plainBuf], { type: pack.mime || 'application/octet-stream' });
+                    setPreview(photoDecryptedPreview, blob, 'dec');
+                    downloadBlob(blob, pack.name || ('decrypted-' + Date.now()));
+                    showMessage('✅ Фото расшифровано');
+                });
+            }).catch(function(e) {
+                var msg = (e && e.message ? e.message : String(e));
+                showMessage('❌ Ошибка дешифрования фото: ' + msg, 'error');
+            }).then(function() { setPhotoBusy('dec', false); updateUI(); });
+        }
+
+        function clearPhotoEncrypt() {
+            if (photoEncryptInput) photoEncryptInput.value = '';
+            updatePhotoInfo();
+            setPreview(photoOriginalPreview, null, 'orig');
+        }
+        function clearPhotoDecrypt() {
+            if (photoDecryptInput) photoDecryptInput.value = '';
+            updatePhotoInfo();
+            setPreview(photoDecryptedPreview, null, 'dec');
+        }
+
+        function updateVideoInfo() {
+            var v1 = videoEncryptInput && videoEncryptInput.files && videoEncryptInput.files[0] ? videoEncryptInput.files[0] : null;
+            if (videoEncryptInfo) videoEncryptInfo.textContent = v1 ? (v1.name + ' — ' + (v1.type || 'video/*') + ' — ' + (v1.size / 1024 / 1024).toFixed(2) + ' МБ') : 'Файл не выбран';
+            var v2 = videoDecryptInput && videoDecryptInput.files && videoDecryptInput.files[0] ? videoDecryptInput.files[0] : null;
+            if (videoDecryptInfo) videoDecryptInfo.textContent = v2 ? (v2.name + ' — ' + (v2.size / 1024 / 1024).toFixed(2) + ' МБ') : 'Файл не выбран';
+        }
+
+        function encryptVideo() {
+            if (!cryptoKeys) return showMessage('❌ Сначала загрузите/сгенерируйте ключи', 'error');
+            var file = videoEncryptInput && videoEncryptInput.files && videoEncryptInput.files[0] ? videoEncryptInput.files[0] : null;
+            if (!file) return showMessage('❌ Выберите видео', 'error');
+            setVideoBusy('enc', true);
+            updateVideoInfo();
+            setVideoPreview(videoOriginalPreview, file, 'orig');
+            file.arrayBuffer().then(function(buf) {
+                return hybridEncrypt(buf).then(function(payload) {
+                    var pack = {
+                        v: 1,
+                        alg: 'h1',
+                        name: file.name || ('video-' + Date.now()),
+                        mime: file.type || 'application/octet-stream',
+                        payload: payload
+                    };
+                    var outName = (pack.name || 'video') + '.krypton';
+                    downloadBlob(new Blob([JSON.stringify(pack)], { type: 'application/json' }), outName);
+                    showMessage('✅ Видео зашифровано: ' + outName);
+                });
+            }).catch(function(e) {
+                showMessage('❌ Ошибка шифрования видео: ' + (e && e.message ? e.message : e), 'error');
+            }).then(function() { setVideoBusy('enc', false); updateUI(); });
+        }
+
+        function decryptVideo() {
+            if (!cryptoKeys) return showMessage('❌ Сначала загрузите/сгенерируйте ключи', 'error');
+            var file = videoDecryptInput && videoDecryptInput.files && videoDecryptInput.files[0] ? videoDecryptInput.files[0] : null;
+            if (!file) return showMessage('❌ Выберите файл `.krypton` с видео', 'error');
+            setVideoBusy('dec', true);
+            updateVideoInfo();
+            file.text().then(function(text) {
+                var pack = JSON.parse(text);
+                if (!pack || typeof pack.payload !== 'string' || pack.payload.indexOf('h1') !== 0) throw new Error('Неверный формат .krypton');
+                return hybridDecrypt(pack.payload.slice(2)).then(function(plainBuf) {
+                    var blob = new Blob([plainBuf], { type: pack.mime || 'application/octet-stream' });
+                    setVideoPreview(videoDecryptedPreview, blob, 'dec');
+                    downloadBlob(blob, pack.name || ('decrypted-video-' + Date.now()));
+                    showMessage('✅ Видео расшифровано');
+                });
+            }).catch(function(e) {
+                var msg = (e && e.message ? e.message : String(e));
+                showMessage('❌ Ошибка дешифрования видео: ' + msg, 'error');
+            }).then(function() { setVideoBusy('dec', false); updateUI(); });
+        }
+
+        function clearVideoEncrypt() {
+            if (videoEncryptInput) videoEncryptInput.value = '';
+            updateVideoInfo();
+            setVideoPreview(videoOriginalPreview, null, 'orig');
+        }
+        function clearVideoDecrypt() {
+            if (videoDecryptInput) videoDecryptInput.value = '';
+            updateVideoInfo();
+            setVideoPreview(videoDecryptedPreview, null, 'dec');
+        }
+
+        function init() {
+            window.CryptonHandlers = {
+                generateKeys: generateKeys,
+                loadKeys: showFileInput,
+                pasteKeys: showPasteKeysInput,
+                clearKeys: clearKeys,
+                exportKeys: exportKeys,
+                applyPastedKeys: applyPastedKeys,
+                cancelPasteKeys: hidePasteKeysInput,
+                encrypt: encryptMessage,
+                decrypt: decryptMessage,
+                fileSelect: function(inputEl) { handleFileSelect({ target: inputEl }); },
+                copy: copyFrom,
+                encryptPhoto: encryptPhoto,
+                decryptPhoto: decryptPhoto,
+                clearPhotoEncrypt: clearPhotoEncrypt,
+                clearPhotoDecrypt: clearPhotoDecrypt,
+                encryptVideo: encryptVideo,
+                decryptVideo: decryptVideo,
+                clearVideoEncrypt: clearVideoEncrypt,
+                clearVideoDecrypt: clearVideoDecrypt
+            };
+            setupEventListeners();
+            loadTextState();
+            if (!window.crypto || !window.crypto.subtle) {
+                showMessage('❌ Web Crypto API недоступна. Откройте файл в браузере (Chrome, Edge) или по адресу http://localhost.', 'error');
+                updateUI();
+                return;
+            }
+            if (photoEncryptInput && photoEncryptInput.addEventListener) photoEncryptInput.addEventListener('change', function(){ updatePhotoInfo(); setPreview(photoOriginalPreview, (photoEncryptInput.files && photoEncryptInput.files[0]) ? photoEncryptInput.files[0] : null, 'orig'); });
+            if (photoDecryptInput && photoDecryptInput.addEventListener) photoDecryptInput.addEventListener('change', function(){ updatePhotoInfo(); });
+            if (videoEncryptInput && videoEncryptInput.addEventListener) videoEncryptInput.addEventListener('change', function(){ updateVideoInfo(); setVideoPreview(videoOriginalPreview, (videoEncryptInput.files && videoEncryptInput.files[0]) ? videoEncryptInput.files[0] : null, 'orig'); });
+            if (videoDecryptInput && videoDecryptInput.addEventListener) videoDecryptInput.addEventListener('change', function(){ updateVideoInfo(); });
+            loadFromStorage(true).then(function(){ updateUI(); }).catch(function(){ updateUI(); });
+            updatePhotoInfo();
+            updateVideoInfo();
+            updateUI();
+        }
+
+        try { if (document.body) init(); else document.addEventListener('DOMContentLoaded', init); } catch (e) { }
     </script>
 </body>
 </html>
